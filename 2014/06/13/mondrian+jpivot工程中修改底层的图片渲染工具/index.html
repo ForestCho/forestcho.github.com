@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>mondrian+jpivot工程中修改底层的图片渲染工具 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言由于mondrian工程自带的底层画图工具用的是JFreechart，JFreechart渲染出来的工具虽然稍微不够细腻，并且可操作性少一些。我想当时作者考虑用JFreechart的原因主要是因为其是一个开源的java项目吧。原来从网上找来个fusionchart这种用支持flash的工具来代替JFreechart，相比而言更漂亮方便。 生成图对比JFreechart原图Fusionchart">
+<meta name="keywords" content="mondrian,jpivot,jfreechart,fusionchart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mondrian+jpivot工程中修改底层的图片渲染工具">
+<meta property="og:url" content="http://38sr.com/2014/06/13/mondrian+jpivot工程中修改底层的图片渲染工具/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言由于mondrian工程自带的底层画图工具用的是JFreechart，JFreechart渲染出来的工具虽然稍微不够细腻，并且可操作性少一些。我想当时作者考虑用JFreechart的原因主要是因为其是一个开源的java项目吧。原来从网上找来个fusionchart这种用支持flash的工具来代替JFreechart，相比而言更漂亮方便。 生成图对比JFreechart原图Fusionchart">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3871/14412197905_9cd11b0ea6.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3888/14411049614_cb4b686d57.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3866/14225557519_ede9bb8b9a.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3919/14410907222_84399516be.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3896/14410887402_8279780d30_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3917/14432353043_fabddb20fa_m.jpg">
+<meta property="og:image" content="https://c1.staticflickr.com/3/2921/14432352873_2f08d825fd_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/6/5157/14225591080_3a26b5693f_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3904/14411030664_38699831ed_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3848/14225538009_3b71073994_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3907/14225741907_685a5596db_m.jpg">
+<meta property="og:image" content="https://c1.staticflickr.com/3/2900/14411030604_e9e5256067_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3887/14408815311_db41569bce_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/6/5079/14412177835_5b5a91d567_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/6/5510/14225576548_5ae9d56afe_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/4/3853/14225576448_4f00465998_m.jpg">
+<meta property="og:image" content="https://c2.staticflickr.com/6/5505/14432352633_10afb83d9e_m.jpg">
+<meta property="og:updated_time" content="2015-09-22T12:38:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mondrian+jpivot工程中修改底层的图片渲染工具">
+<meta name="twitter:description" content="前言由于mondrian工程自带的底层画图工具用的是JFreechart，JFreechart渲染出来的工具虽然稍微不够细腻，并且可操作性少一些。我想当时作者考虑用JFreechart的原因主要是因为其是一个开源的java项目吧。原来从网上找来个fusionchart这种用支持flash的工具来代替JFreechart，相比而言更漂亮方便。 生成图对比JFreechart原图Fusionchart">
+<meta name="twitter:image" content="https://c2.staticflickr.com/4/3871/14412197905_9cd11b0ea6.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-mondrian+jpivot工程中修改底层的图片渲染工具" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            mondrian+jpivot工程中修改底层的图片渲染工具
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/06/13/mondrian+jpivot工程中修改底层的图片渲染工具/">
+            <time datetime="2014-06-13T13:21:32.000Z" itemprop="datePublished">2014-06-13</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/fusionchart/">fusionchart</a>, <a class="tag-link" href="/tags/jfreechart/">jfreechart</a>, <a class="tag-link" href="/tags/jpivot/">jpivot</a>, <a class="tag-link" href="/tags/mondrian/">mondrian</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于mondrian工程自带的底层画图工具用的是JFreechart，JFreechart渲染出来的工具虽然稍微不够细腻，并且可操作性少一些。我想当时作者考虑用JFreechart的原因主要是因为其是一个开源的java项目吧。原来从网上找来个fusionchart这种用支持flash的工具来代替JFreechart，相比而言更漂亮方便。</p>
+<h2 id="生成图对比"><a href="#生成图对比" class="headerlink" title="生成图对比"></a>生成图对比</h2><p>JFreechart原图<br><img src="https://c2.staticflickr.com/4/3871/14412197905_9cd11b0ea6.jpg" alt=""><br>Fusionchart原图<br> <img src="https://c2.staticflickr.com/4/3888/14411049614_cb4b686d57.jpg" alt=""><br>稍微要清楚些，并且Fusionchart参数丰富，下面的2007-2014小图形都是可以点击的，有更佳的浏览效果</p>
+<p>JFreechart放大后效果<br> <img src="https://c2.staticflickr.com/4/3866/14225557519_ede9bb8b9a.jpg" alt=""><br>Fusionchart放大后效果<br><img src="https://c2.staticflickr.com/4/3919/14410907222_84399516be.jpg" alt=""></p>
+<p>放大后Fusionchart明显更加清晰。</p>
+<h2 id="移植过程"><a href="#移植过程" class="headerlink" title="移植过程"></a>移植过程</h2><p>由于Fusionchart生成图形的方法是先生成json后者xml格式的数据，然后在页面中用js去读取数据并在页面中用javascript或者flash来渲染图片。</p>
+<h3 id="生成数据"><a href="#生成数据" class="headerlink" title="生成数据"></a>生成数据</h3><p>原工程每次都是点击[生成图片]按钮后，后台才会生成一张新的图片，也就说说在这个过程中会通过图片参数生成新的图片。新工程也要在这个过程中将图片的数据写入到一个json或者xml的文件中去。</p>
+<p>1.将testpage.jsp中的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;wcf:scriptbutton id=&quot;chartButton01&quot; tooltip=&quot;toolb.chart&quot; img=&quot;chart&quot; model=&quot;#&#123;chart01.visible&#125;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>这一段生成图片的按钮的代码注释掉，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jp:chart id=&quot;chart01&quot; query=&quot;#&#123;query01&#125;&quot; visible=&quot;false&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码中的visiable设为true<br>现在采用每次更改图片参数后直接生成新的数据。<br>2.新增加DatasetToJson.java 文件，主要用来生成图片的参数以及内容数据(将dataset转换成Fusionchart可现实的数据结构)。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.util;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.jfree.data.category.DefaultCategoryDataset;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONArray;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONException;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.tonbeller.wcf.controller.RequestContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatasetToJson</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">generateColor</span><span class="params">(<span class="keyword">int</span> currcolor)</span> </span>&#123;</span><br><span class="line">        String[] color = &#123;</span><br><span class="line">            <span class="string">"FF0000"</span>, <span class="string">"00FF00"</span>, <span class="string">"0000FF"</span>, <span class="string">"00FFFF"</span>, <span class="string">"FF00FF"</span>, <span class="string">"99CC33"</span>, <span class="string">"669900"</span>, <span class="string">"FF9966"</span>, <span class="string">"666666"</span>, <span class="string">"FFFF00"</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> color[(currcolor) % color.length];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveFile</span><span class="params">(String str, String filepath)</span> </span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(filepath);</span><br><span class="line">        FileOutputStream fileOutputStream = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                File parent = file.getParentFile();</span><br><span class="line">                parent.mkdirs();</span><br><span class="line">                file.createNewFile();</span><br><span class="line">            &#125;</span><br><span class="line">            fileOutputStream = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">            OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(fileOutputStream,</span><br><span class="line">                <span class="string">"UTF-8"</span>);</span><br><span class="line">            osw.write(str);</span><br><span class="line">            osw.flush();</span><br><span class="line">            fileOutputStream.close();</span><br><span class="line">            fileOutputStream = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将dataset转换成Fusionchart可现实的数据结构</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">datasetToJson</span><span class="params">(DefaultCategoryDataset dataset, RequestContext context, <span class="keyword">int</span> chartType, String chartTitle, String horizAxisLabel, String vertAxisLabel)</span> <span class="keyword">throws</span> JSONException </span>&#123;</span><br><span class="line">        JSONObject jo = <span class="keyword">new</span> JSONObject();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//组装chart部分</span></span><br><span class="line">        JSONObject chartsjo = <span class="keyword">new</span> JSONObject();</span><br><span class="line">        chartsjo.put(<span class="string">"charttype"</span>, chartType);</span><br><span class="line">        <span class="keyword">if</span> (chartType % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            chartsjo.put(<span class="string">"showvalues"</span>, <span class="string">"1"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        chartsjo.put(<span class="string">"caption"</span>, chartTitle);</span><br><span class="line">        chartsjo.put(<span class="string">"xaxisname"</span>, horizAxisLabel);</span><br><span class="line">        chartsjo.put(<span class="string">"yaxisname"</span>, vertAxisLabel);</span><br><span class="line">        chartsjo.put(<span class="string">"palette"</span>, <span class="string">"2"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"rotatenames"</span>, <span class="string">"0"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"animation"</span>, <span class="string">"1"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"numdivlines"</span>, <span class="string">"4"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"basefont"</span>, <span class="string">"Arial"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"basefontsize"</span>, <span class="string">"12"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"useroundedges"</span>, <span class="string">"0"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"legendborderalpha"</span>, <span class="string">"0"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"showplotborder"</span>, <span class="number">0</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"exportEnabled"</span>, <span class="number">1</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"exportAtClient"</span>, <span class="number">1</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"exportAction"</span>, <span class="string">"download"</span>);</span><br><span class="line">        chartsjo.put(<span class="string">"exportHandler"</span>, <span class="string">""</span>); <span class="comment">//fcExporter1/</span></span><br><span class="line">        jo.put(<span class="string">"chart"</span>, chartsjo);</span><br><span class="line">        <span class="comment">//categories</span></span><br><span class="line">        JSONObject categories = <span class="keyword">new</span> JSONObject();</span><br><span class="line">        categories.put(<span class="string">"font"</span>, <span class="string">"Arial"</span>);</span><br><span class="line">        categories.put(<span class="string">"fontsize"</span>, <span class="string">"12"</span>);</span><br><span class="line">        JSONArray category = <span class="keyword">new</span> JSONArray();</span><br><span class="line">        <span class="comment">//讲行加入数据集中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataset.getColumnCount(); i++) &#123;</span><br><span class="line">            JSONObject subjson = <span class="keyword">new</span> JSONObject();</span><br><span class="line">            subjson.put(<span class="string">"label"</span>, dataset.getColumnKey(i).toString());</span><br><span class="line">            category.put(subjson);</span><br><span class="line">        &#125;</span><br><span class="line">        categories.put(<span class="string">"category"</span>, category);</span><br><span class="line">        jo.put(<span class="string">"categories"</span>, categories);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//dataset   </span></span><br><span class="line">        JSONArray datasetarr = <span class="keyword">new</span> JSONArray();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> currcolor = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; dataset.getRowCount(); j++) &#123;</span><br><span class="line">            JSONObject dataset1 = <span class="keyword">new</span> JSONObject();</span><br><span class="line">            dataset1.put(<span class="string">"seriesname"</span>, dataset.getRowKey(j).toString());</span><br><span class="line">            dataset1.put(<span class="string">"color"</span>, generateColor(currcolor));</span><br><span class="line">            currcolor++;</span><br><span class="line">            dataset1.put(<span class="string">"alpha"</span>, <span class="string">"90"</span>);</span><br><span class="line">            dataset1.put(<span class="string">"showvalues"</span>, <span class="string">"0"</span>);</span><br><span class="line">            JSONArray data = <span class="keyword">new</span> JSONArray();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; dataset.getColumnCount(); k++) &#123;</span><br><span class="line">                JSONObject subdata = <span class="keyword">new</span> JSONObject();</span><br><span class="line">                subdata.put(<span class="string">"value"</span>, dataset.getValue(j, k));</span><br><span class="line">                data.put(subdata);</span><br><span class="line">            &#125;</span><br><span class="line">            dataset1.put(<span class="string">"data"</span>, data);</span><br><span class="line">            datasetarr.put(dataset1);</span><br><span class="line">        &#125;</span><br><span class="line">        jo.put(<span class="string">"dataset"</span>, datasetarr);</span><br><span class="line">        DatasetToJson dtj = <span class="keyword">new</span> DatasetToJson();</span><br><span class="line">        dtj.saveFile(jo.toString(), <span class="string">"C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\webapp\\Data.json"</span>);</span><br><span class="line">        System.out.println(jo.toString());</span><br><span class="line">        <span class="keyword">return</span> jo.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.在ChartComponent.java中调用生成图片参数的函数<br>将render()函数中的部分代码变为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">DefaultCategoryDataset dataset = null;</span><br><span class="line">               switch (dimCount) &#123;</span><br><span class="line">			  case 1 :</span><br><span class="line">				logger.info(&quot;1-dim data&quot;);</span><br><span class="line">				dataset = build1dimDataset();</span><br><span class="line">				break;</span><br><span class="line">			  case 2 :</span><br><span class="line">				logger.info(&quot;2-dim data&quot;);</span><br><span class="line">				dataset = build2dimDataset();				DatasetToJson.datasetToJson(dataset,context,chartType,chartTitle,horizAxisLabel,vertAxisLabel);</span><br><span class="line">				break;</span><br><span class="line">			  default :</span><br><span class="line">				logger.error(&quot;less than 1 or more than 2 dimensions&quot;);</span><br><span class="line">				throw new IllegalArgumentException(&quot;ChartRenderer requires a 1 or 2 dimensional result&quot;);</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="调用数据显示"><a href="#调用数据显示" class="headerlink" title="调用数据显示"></a>调用数据显示</h3><p>1.在WebRoot下面新建Fusionchart文件夹，将从Fusionchart官网下载来的文件中chart目录下的FusionCharts.HC.Charts.js，FusionCharts.HC.js，FusionCharts.js，jquery.min.js，以及一些你想要生成的图片的swf, Column3D.swf, MSBar2D.swf, MSBar3D.swf, MSColumn2D.swf, MSColumn3D.swf, MSCombi3D.swf, MSLine.swf, Pie2D.swf, Pie3D.swf, StackedBar2D.swf, StackedBar3D.swf, StackedColumn3D.swf移到新建的目录下面<br>2.在testpage.jsp中引用新添加的js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;js/chenall.js&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;FusionCharts/FusionCharts.js&quot;&gt;&lt;/script&gt;  </span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;FusionCharts/FusionChartsExportComponent.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.然后在testpage.jsp中读取json文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;%		 int charttype=0;</span><br><span class="line">		 StringBuffer sb= new StringBuffer();</span><br><span class="line">		 String path=&quot;C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\webapps\\webapp\\Data.json&quot;;</span><br><span class="line">		 File file= new File(path);</span><br><span class="line">		  	FileInputStream fileInputStream = null;  </span><br><span class="line">				if(!file.exists())&#123;</span><br><span class="line">					charttype=0;</span><br><span class="line">				&#125;else&#123; </span><br><span class="line">					fileInputStream = new FileInputStream(file);</span><br><span class="line">					  byte[] buf = new byte[1024];</span><br><span class="line">					while((fileInputStream.read(buf))!=-1)&#123;</span><br><span class="line">							sb.append(new String(buf));</span><br><span class="line">					&#125; </span><br><span class="line">					fileInputStream.close();			</span><br><span class="line">				JSONObject jo=new JSONObject(sb.toString());</span><br><span class="line">				JSONObject jochart=jo.optJSONObject(&quot;chart&quot;);	</span><br><span class="line">				charttype=jochart.optInt(&quot;charttype&quot;);			</span><br><span class="line">				&#125; </span><br><span class="line"> %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.接着在WebRoot/jpivot/chart/chartpropertiesform.xml中将图标配置表单中的图形类型设置好，将之前的代码用现在这代码替换掉就ok。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr&gt;</span><br><span class="line">  &lt;td&gt;Chart Type&lt;/td&gt;</span><br><span class="line">  &lt;td&gt;</span><br><span class="line">   &lt;listBox1 type=&quot;int&quot; modelReference=&quot;chartType&quot;&gt;</span><br><span class="line">	&lt;listItem value=&quot;1&quot; label=&quot;Vertical Bar&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;2&quot; label=&quot;Vertical Bar 3D&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;3&quot; label=&quot;Hozontal Bar&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;4&quot; label=&quot;Horizontal Bar 3D&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;5&quot; label=&quot;Stacked Vertical Bar&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;6&quot; label=&quot;Stacked Vertical Bar 3D&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;7&quot; label=&quot;Stacked Horizontal Bar&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;8&quot; label=&quot;Stacked Horizontal Bar 3D&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;9&quot; label=&quot;Vertical Line&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;10&quot; label=&quot;Horizontal Line&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;11&quot; label=&quot;Vertical Area&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;12&quot; label=&quot;Horizontal Area&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;13&quot; label=&quot;Vertical Stacked Area&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;14&quot; label=&quot;Horizontal Stacked Area&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;15&quot; label=&quot;Pie Charts by Column&quot;/&gt;</span><br><span class="line">	&lt;listItem value=&quot;16&quot; label=&quot;Pie Charts by Row&quot;/&gt;</span><br><span class="line">   &lt;/listBox1&gt;</span><br><span class="line">  &lt;/td&gt;</span><br><span class="line"> &lt;/tr&gt;</span><br></pre></td></tr></table></figure></p>
+<p>5.最后根据不同的charttype渲染出不同种类的图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if(charttype==1)&#123; %&gt;</span><br><span class="line">&lt;div id=&quot;chartContainer1&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;    </span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">    FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/MSColumn2D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer1&quot;);      </span><br><span class="line">    &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt;    </span><br><span class="line">&lt;% &#125;else if(charttype==2)&#123; %&gt; </span><br><span class="line">&lt;div id=&quot;chartContainer2&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;     </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;     </span><br><span class="line">    FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/MSColumn3D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer2&quot;);      </span><br><span class="line">    &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt; </span><br><span class="line"> &lt;% &#125;else if(charttype==3)&#123; %&gt;   </span><br><span class="line">&lt;div id=&quot;chartContainer3&quot;style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;    </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/MSBar2D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer3&quot;);      </span><br><span class="line">    &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt;     </span><br><span class="line">&lt;% &#125;else if(charttype==4)&#123; %&gt; </span><br><span class="line">&lt;div id=&quot;chartContainer4&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;      &lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/MSBar3D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer4&quot;);      </span><br><span class="line">    &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt; </span><br><span class="line">&lt;% &#125;else if(charttype==5)&#123; %&gt;   </span><br><span class="line">&lt;div id=&quot;chartContainer5&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;    </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/StackedColumn2D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer5&quot;);      </span><br><span class="line">     &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt;    </span><br><span class="line"> &lt;% &#125;else if(charttype==6)&#123; %&gt;  </span><br><span class="line">&lt;div id=&quot;chartContainer6&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;     </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/StackedColumn3D.swf&quot;, </span><br><span class="line">                   &quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer6&quot;);      </span><br><span class="line">     &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt; </span><br><span class="line">&lt;% &#125;else if(charttype==7)&#123; %&gt;      </span><br><span class="line">&lt;div id=&quot;chartContainer7&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;    </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/StackedBar2D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer7&quot;);      </span><br><span class="line">    &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt;   </span><br><span class="line">&lt;% &#125;else if(charttype==8)&#123; %&gt;   </span><br><span class="line">&lt;div id=&quot;chartContainer8&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;     </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/StackedBar3D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer8&quot;);      </span><br><span class="line">     &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt; </span><br><span class="line">&lt;% &#125;else if(charttype==9)&#123; %&gt;     </span><br><span class="line">&lt;div id=&quot;chartContainer9&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;   </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;      </span><br><span class="line">    FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/Pie2D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer9&quot;);      </span><br><span class="line">     &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt;    </span><br><span class="line">&lt;% &#125;else if(charttype==10)&#123; %&gt;  </span><br><span class="line">&lt;div id=&quot;chartContainer10&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;   </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;     </span><br><span class="line">    FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/Pie3D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer10&quot;);      </span><br><span class="line">     &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt; </span><br><span class="line">&lt;% &#125;else if(charttype==11)&#123; %&gt;        </span><br><span class="line">&lt;div id=&quot;chartContainer11&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;     </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;    </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/MSLine.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot;,&quot;1&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer11&quot;);      </span><br><span class="line">    &lt;/script&gt;  </span><br><span class="line">    &lt;p&gt;&lt;/p&gt; </span><br><span class="line">&lt;% &#125;else if(charttype==12)&#123; %&gt;         </span><br><span class="line">&lt;div id=&quot;chartContainer12&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;     </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;   </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;FusionCharts/MSArea.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer12&quot;);      </span><br><span class="line">     &lt;/script&gt;</span><br><span class="line"> 	&lt;p&gt;&lt;/p&gt;   </span><br><span class="line">&lt;% &#125;else if(charttype==13)&#123; %&gt;         </span><br><span class="line">&lt;div id=&quot;chartContainer12&quot; style=&quot;margin-top:0px&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;     </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;     </span><br><span class="line">     FusionCharts.setCurrentRenderer(&apos;flash&apos;);     </span><br><span class="line">	 var myChart = new FusionCharts( &quot;FusionCharts/MSCombi3D.swf&quot;,&quot;myChartId&quot;, &quot;550&quot;, &quot;400&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setJSONUrl(&quot;Data.json&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer12&quot;);      </span><br><span class="line">    &lt;/script&gt; </span><br><span class="line">&lt;% &#125;else &#123; %&gt;    </span><br><span class="line">&lt;%&#125; %&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="细节修改"><a href="#细节修改" class="headerlink" title="细节修改"></a>细节修改</h3><p>其他一些细节，删除一些基于jfreechart的代码，隐藏一些按钮如显示图片，生成pdf，生成图片，让项目更加可控。生成pdf和生成图片这些功能Fusionchart都是提供了接口的，只需后续补上就行。</p>
+<h2 id="修改后效果图"><a href="#修改后效果图" class="headerlink" title="修改后效果图"></a>修改后效果图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;dataset&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;seriesname&quot;: &quot;2007.&quot;,</span><br><span class="line">      &quot;color&quot;: &quot;FF0000&quot;,</span><br><span class="line">      &quot;alpha&quot;: &quot;90&quot;,</span><br><span class="line">      &quot;data&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 10032.85324614</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 1682.39012</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 12844</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;showvalues&quot;: &quot;0&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;seriesname&quot;: &quot;2008.&quot;,</span><br><span class="line">      &quot;color&quot;: &quot;00FF00&quot;,</span><br><span class="line">      &quot;alpha&quot;: &quot;90&quot;,</span><br><span class="line">      &quot;data&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 5840.51637758</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 928.33792</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 7107</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;showvalues&quot;: &quot;0&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;seriesname&quot;: &quot;2009.&quot;,</span><br><span class="line">      &quot;color&quot;: &quot;0000FF&quot;,</span><br><span class="line">      &quot;alpha&quot;: &quot;90&quot;,</span><br><span class="line">      &quot;data&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 23324.434748509997</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 9332.95024</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 55916</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;showvalues&quot;: &quot;0&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;seriesname&quot;: &quot;2010.&quot;,</span><br><span class="line">      &quot;color&quot;: &quot;00FFFF&quot;,</span><br><span class="line">      &quot;alpha&quot;: &quot;90&quot;,</span><br><span class="line">      &quot;data&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 2756.74952415</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 1581.01793</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 13504</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;showvalues&quot;: &quot;0&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;seriesname&quot;: &quot;2011.&quot;,</span><br><span class="line">      &quot;color&quot;: &quot;FF00FF&quot;,</span><br><span class="line">      &quot;alpha&quot;: &quot;90&quot;,</span><br><span class="line">      &quot;data&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 0.44785</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 1.6555199999999999</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;value&quot;: 3</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;showvalues&quot;: &quot;0&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  &quot;chart&quot;: &#123;</span><br><span class="line">    &quot;xaxisname&quot;: &quot;&quot;,</span><br><span class="line">    &quot;animation&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;numdivlines&quot;: &quot;4&quot;,</span><br><span class="line">    &quot;palette&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;useroundedges&quot;: &quot;0&quot;,</span><br><span class="line">    &quot;showplotborder&quot;: 0,</span><br><span class="line">    &quot;yaxisname&quot;: &quot;&quot;,</span><br><span class="line">    &quot;charttype&quot;: 1,</span><br><span class="line">    &quot;caption&quot;: &quot;&quot;,</span><br><span class="line">    &quot;exportEnabled&quot;: 1,</span><br><span class="line">    &quot;exportAtClient&quot;: 1,</span><br><span class="line">    &quot;basefont&quot;: &quot;Arial&quot;,</span><br><span class="line">    &quot;rotatenames&quot;: &quot;0&quot;,</span><br><span class="line">    &quot;exportAction&quot;: &quot;download&quot;,</span><br><span class="line">    &quot;showvalues&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;exportHandler&quot;: &quot;&quot;,</span><br><span class="line">    &quot;legendborderalpha&quot;: &quot;0&quot;,</span><br><span class="line">    &quot;basefontsize&quot;: &quot;12&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;categories&quot;: &#123;</span><br><span class="line">    &quot;category&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;label&quot;: &quot;交易金额(万元).&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;label&quot;: &quot;房屋面积(千套).&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;label&quot;: &quot;交易数.&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;font&quot;: &quot;Arial&quot;,</span><br><span class="line">    &quot;fontsize&quot;: &quot;12&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面所有的图都是共用同一个数据，这些图除开饼图json文件结构基本一样，饼图只能画出一个图，需要在后续中继续修改．<br>Column 2D chart &amp; Column 3D chart<br><img src="https://c2.staticflickr.com/4/3896/14410887402_8279780d30_m.jpg" alt=""><img src="https://c2.staticflickr.com/4/3917/14432353043_fabddb20fa_m.jpg" alt=""> </p>
+<p>2D Bar chart &amp; 3D Bar  chart<br><img src="https://c1.staticflickr.com/3/2921/14432352873_2f08d825fd_m.jpg" alt=""><img src="https://c2.staticflickr.com/6/5157/14225591080_3a26b5693f_m.jpg" alt=""></p>
+<p>Stacked Column 2D chart &amp; Stacked Column 3D chart<br><img src="https://c2.staticflickr.com/4/3904/14411030664_38699831ed_m.jpg" alt=""><img src="https://c2.staticflickr.com/4/3848/14225538009_3b71073994_m.jpg" alt="">  </p>
+<p>Stacked Bar 2D chart &amp; Stacked Bar 3D chart<br><img src="https://c2.staticflickr.com/4/3907/14225741907_685a5596db_m.jpg" alt=""><img src="https://c1.staticflickr.com/3/2900/14411030604_e9e5256067_m.jpg" alt=""></p>
+<p>Pie Bar 2D chart &amp; Pid Bar 3D chart<br><img src="https://c2.staticflickr.com/4/3887/14408815311_db41569bce_m.jpg" alt=""><img src="https://c2.staticflickr.com/6/5079/14412177835_5b5a91d567_m.jpg" alt=""></p>
+<p>Line &amp; Area<br><img src="https://c2.staticflickr.com/6/5510/14225576548_5ae9d56afe_m.jpg" alt=""><img src="https://c2.staticflickr.com/4/3853/14225576448_4f00465998_m.jpg" alt=""></p>
+<p>Combination 3D<br><img src="https://c2.staticflickr.com/6/5505/14432352633_10afb83d9e_m.jpg" alt=""></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2014/06/13/mondrian+jpivot工程中修改底层的图片渲染工具/" data-id="cjbc9suz4001yyoqb586kkbmq" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/06/29/nodejs学习笔记(4) - redis使用/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    nodejs学习笔记(4) - redis使用
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/06/06/用FusionCharts代替JFreeChart画图表/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">用FusionCharts代替JFreeChart画图表</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>jquery+ajax+servlet实现动态数据加载 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="AJAX技术AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。1、优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占，ajax在一定程度上能减轻服务器的负载。因为它可以做到页面部分刷新，而不是传统的整个页面的刷新；2、其次ajax也可以很好的增强用户体验 ，可以做到不打断用">
+<meta name="keywords" content="jquery,ajax,servlet,动态数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery+ajax+servlet实现动态数据加载">
+<meta property="og:url" content="http://38sr.com/2014/01/14/jqueryajaxservlet实现动态数据加载/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="AJAX技术AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。1、优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占，ajax在一定程度上能减轻服务器的负载。因为它可以做到页面部分刷新，而不是传统的整个页面的刷新；2、其次ajax也可以很好的增强用户体验 ，可以做到不打断用">
+<meta property="og:image" content="http://crazycsl.u.qiniudn.com/wp-content/uploads/2014/01/1-300x78.png">
+<meta property="og:image" content="http://crazycsl.u.qiniudn.com/wp-content/uploads/2014/01/2-300x94.png">
+<meta property="og:updated_time" content="2015-09-22T12:15:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery+ajax+servlet实现动态数据加载">
+<meta name="twitter:description" content="AJAX技术AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。1、优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占，ajax在一定程度上能减轻服务器的负载。因为它可以做到页面部分刷新，而不是传统的整个页面的刷新；2、其次ajax也可以很好的增强用户体验 ，可以做到不打断用">
+<meta name="twitter:image" content="http://crazycsl.u.qiniudn.com/wp-content/uploads/2014/01/1-300x78.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-jqueryajaxservlet实现动态数据加载" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            jquery+ajax+servlet实现动态数据加载
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/01/14/jqueryajaxservlet实现动态数据加载/">
+            <time datetime="2014-01-14T15:50:00.000Z" itemprop="datePublished">2014-01-14</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/畅游互联网/">畅游互联网</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ajax/">ajax</a>, <a class="tag-link" href="/tags/jquery/">jquery</a>, <a class="tag-link" href="/tags/servlet/">servlet</a>, <a class="tag-link" href="/tags/动态数据/">动态数据</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="AJAX技术"><a href="#AJAX技术" class="headerlink" title="AJAX技术"></a>AJAX技术</h2><p>AJAX全称为“Asynchronous JavaScript and XML”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。<br>1、优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占，ajax在一定程度上能减轻服务器的负载。因为它可以做到页面部分刷新，而不是传统的整个页面的刷新；<br>2、其次ajax也可以很好的增强用户体验 ，可以做到不打断用户的操作，具有更加迅速的响应能力。<br>当然任何一项新技术的诞生必定或多或少的有其负面印象，ajax也有其缺点：<br>1、AJAX技术给用户带来很好的用户体验的同时也对IT企业带来了新的安全威胁，Ajax技术就如同对企业数据建立了一个直接通道。这使得开发者在不经意间会暴露比以前更多的数据和服务器逻辑。Ajax的逻辑可以对客户端的安全扫描技术隐藏起来，允许黑客从远端服务器上建立新的攻击。还有Ajax也难以避免一些已知的安全弱点，诸如跨站点脚步攻击、SQL注入攻击和基于Credentials的安全漏洞等等。<br>2、浏览器上的后退(&lt;-)按钮与ajax不兼容，因为用ajax每一次点击并没有出现一个新的页面，所以没法后退和前进，<br>3、给浏览器带来不少负担，一些本不应该浏览器处理的操作现在交给浏览器处理，给客户端带来一些压力。</p>
+<h2 id="什么是jQuery"><a href="#什么是jQuery" class="headerlink" title="什么是jQuery"></a>什么是jQuery</h2><p>jQuery是一个兼容多浏览器的javascript框架，核心理念是write less,do more(写得更少,做得更多)。jQuery在2006年1月由美国人John Resig在纽约的barcamp发布，吸引了来自世界各地的众多JavaScript高手加入，由Dave Methvin率领团队进行开发。如今，jQuery已经成为最流行的javascript框架，在世界前10000个访问最多的网站中，有超过55%在使用jQuery。<br>一句话，jQuery是一个轻量级的JS框架，能帮我我们写js脚本，特别是我这种对javascript不熟悉的。<br>只需在head标签内引用如下代码即可使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js&quot;&gt;// &lt;![CDATA[</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+<p>按钮点击前状态<br><a href="http://crazycsl.u.qiniudn.com/wp-content/uploads/2014/01/1.png" target="_blank" rel="noopener"><img src="http://crazycsl.u.qiniudn.com/wp-content/uploads/2014/01/1-300x78.png" alt="1"></a><br>点击其中一条后出现新数据<br><a href="http://crazycsl.u.qiniudn.com/wp-content/uploads/2014/01/2.png" target="_blank" rel="noopener"><img src="http://crazycsl.u.qiniudn.com/wp-content/uploads/2014/01/2-300x94.png" alt="2"></a></p>
+<h2 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h2><p>显示页面代码<br>1、头部需引入jquery.js&amp;global.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./js/jquery-1.9.1.min.js&quot;&gt;</span><br><span class="line">&lt;/script&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;./js/global.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>2、body中的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;display: block;&quot;&gt;</span><br><span class="line">	&lt;div class=&quot;divwrap0&quot; style=&quot;width: 100%; height: 25px; margin-top: 20px;&quot;&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;id&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;cname&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;smallmemo&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;tollgatenum&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;date&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;% Timestamp pubTime = null; String sql = &quot;&quot;; PreparedStatement ps = null; ResultSet rs = null; Connection conn = null; BaseDb baseDb = new BaseDb(); conn = baseDb.getConnection(); sql = &quot;select cid,cname,smallmemo,tollgatenum,makedate from tb_zy_curriculum &quot;; ps = conn.prepareStatement(sql); rs = ps.executeQuery(); while (rs != null &amp;amp;&amp;amp; rs.next()) &#123; pubTime = rs.getTimestamp(5); %&gt;</span><br><span class="line">	&lt;div class=&quot;&amp;amp;quot;divwrap&lt;%=rs.getInt(1)%&quot;&gt;&quot;</span><br><span class="line">		style=&quot;width:100%;height:20px;margin-top:20px;&quot;&gt;</span><br><span class="line">		&lt;input class=&quot;cid&lt;%=rs.getInt(1)%&gt;&quot; type=&quot;hidden&quot; /&gt; value=&quot;&lt;%=rs.getInt(1)%&gt;&quot; /&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;&lt;%=rs.getInt(1)%&gt;&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;&lt;button class=&quot;course&lt;%=rs.getInt(1)%&gt;&quot;&gt;&lt;%=rs.getString(2)%&gt;&lt;/button&gt;&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;&lt;%=rs.getString(3)%&gt;&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;&lt;%=rs.getInt(4)%&gt;&lt;/div&gt;</span><br><span class="line">		&lt;div style=&quot;width: 20%; float: left;&quot;&gt;&lt;%=DateUtil.format(pubTime, &quot;yyyy-MM-dd hh:mm:ss&quot;)%&gt;&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;% &#125; %&gt;</span><br><span class="line">	&lt;div class=&quot;divitem&quot; style=&quot;width: 100%; height: 25px; margin-top: 20px;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>global.js代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">// JavaScript Document</span><br><span class="line">$(function() &#123;</span><br><span class="line">    $(&quot;button&quot;).on(&apos;click&apos;, function() &#123;</span><br><span class="line">        var classname = $(this).attr(&quot;class&quot;);</span><br><span class="line">        var cid = $(&quot;.cid&quot; + classname.substr(classname.length - 1, classname.length)).val();</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: &quot;POST&quot;,</span><br><span class="line">            url: &quot;./servlet/tolllist&quot;,</span><br><span class="line">            dataType: &quot;json&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                &quot;cid&quot;: cid</span><br><span class="line">            &#125;,</span><br><span class="line">            beforeSend: function() &#123;</span><br><span class="line">                $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;msg&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).addClass(&quot;loading&quot;).html(&quot;正在查询id=&quot; + cid + &quot;的课程的关卡...&quot;).css(&quot;color&quot;, &quot;#999&quot;).appendTo(&apos;.divwrap&apos; + cid);</span><br><span class="line">            &#125;,</span><br><span class="line">            success: function(json) &#123;</span><br><span class="line">                $(&apos;.divitem&apos;).html(&quot;&quot;);</span><br><span class="line">                if (json.length &gt; 0) &#123;</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;tgid&quot; style=&quot;width: 20%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(&quot;tgid&quot;).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;ename&quot; style=&quot;width: 20%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(&quot;ename&quot;).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;packageurl&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(&quot;packageurl&quot;).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;date&quot; style=&quot;width: 20%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(&quot;date&quot;).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    $(&apos;.divitem&apos;).html(&quot;该课程暂时没有数据&quot;).css(&quot;color&quot;, &quot;#999&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                for (var i = 0; i &lt; json.length; i++) &#123;</span><br><span class="line">                    var para = json[i];</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;tgid&quot; style=&quot;width: 20%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(para.tgid).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;ename&quot; style=&quot;width: 20%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(para.ename).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;packageurl&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(para.packageurl).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                    $(&apos;&lt;/pre&gt;</span><br><span class="line">&lt;div id=&quot;date&quot; style=&quot;width: 20%;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&apos;).html(para.date).css(&quot;color&quot;, &quot;#999&quot;).css(&quot;float&quot;, &quot;left&quot;).appendTo(&apos;.divitem&apos;);</span><br><span class="line">                &#125;</span><br><span class="line">                $(&quot;#msg&quot;).remove();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>servlet<a href="路径为/servlet/tolllist">tolllist</a>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public void doPost(HttpServletRequest request, HttpServletResponse response)</span><br><span class="line">throws ServletException, IOException &#123;</span><br><span class="line">    request.setCharacterEncoding(&quot;utf-8&quot;);</span><br><span class="line">    response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">    int cid = Integer.parseInt(request.getParameter(&quot;cid&quot;));</span><br><span class="line">    String sql = &quot;&quot;;</span><br><span class="line">    PreparedStatement ps = null;</span><br><span class="line">    ResultSet rs = null;</span><br><span class="line">    Connection conn = null;</span><br><span class="line">    BaseDb baseDb = new BaseDb();</span><br><span class="line">    conn = baseDb.getConnection();</span><br><span class="line">    JSONArray dataArr = new JSONArray();</span><br><span class="line">    try &#123;</span><br><span class="line">        sql = &quot;select tgid,enname,packageurl,makedate  from tollgate where cid=? &quot;;</span><br><span class="line">        ps = conn.prepareStatement(sql);</span><br><span class="line">        ps.setInt(1, cid);</span><br><span class="line">        rs = ps.executeQuery();</span><br><span class="line"></span><br><span class="line">        while (rs != null &amp; amp; &amp; amp; rs.next()) &#123;</span><br><span class="line">            JSONObject item = new JSONObject();</span><br><span class="line">            item.put(&quot;tgid&quot;, rs.getInt(1));</span><br><span class="line">            item.put(&quot;ename&quot;, rs.getString(2));</span><br><span class="line">            item.put(&quot;packageurl&quot;, rs.getString(3));</span><br><span class="line">            Timestamp ts = rs.getTimestamp(4);</span><br><span class="line">            item.put(&quot;date&quot;, StrUtil.nvl(DateUtil.format(ts, &quot;yyyy-MM-dd hh:mm:ss&quot;)));</span><br><span class="line">            dataArr.put(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (SQLException e) &#123;</span><br><span class="line">        // TODO Auto-generated catch block</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (JSONException e) &#123;</span><br><span class="line">        // TODO Auto-generated catch block</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        // TODO Auto-generated catch block</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    PrintWriter out = response.getWriter();</span><br><span class="line">    out.write(dataArr.toString());</span><br><span class="line">    out.flush();</span><br><span class="line">    out.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2014/01/14/jqueryajaxservlet实现动态数据加载/" data-id="cjbc9suye001eyoqbooy40eky" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/02/20/jquery解析json结构/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    jQuery解析json结构
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/01/05/新手在matlab下写出的朴素bayes分类器/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">新手在matlab下写出的朴素bayes分类器</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Statement和PreparedStatement学习笔记 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="最近在公司实习，做后台接口，经常涉及到对数据库的修改，发现数据库执行语句基本上PreparedStatement代替了 Statement (学生时代经常接触的，看样子公司用的跟学校学的还真不一样），当我好好查看这个函数后，也发现这个函数有很多优点： 最明显的是代码可读性比较强PreparedStatement用法 123456789String sql = &amp;quot;&amp;quot;;Prepar">
+<meta name="keywords" content="java,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Statement和PreparedStatement学习笔记">
+<meta property="og:url" content="http://38sr.com/2013/08/21/statement和preparedstatement学习笔记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近在公司实习，做后台接口，经常涉及到对数据库的修改，发现数据库执行语句基本上PreparedStatement代替了 Statement (学生时代经常接触的，看样子公司用的跟学校学的还真不一样），当我好好查看这个函数后，也发现这个函数有很多优点： 最明显的是代码可读性比较强PreparedStatement用法 123456789String sql = &amp;quot;&amp;quot;;Prepar">
+<meta property="og:updated_time" content="2016-02-21T12:40:49.252Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Statement和PreparedStatement学习笔记">
+<meta name="twitter:description" content="最近在公司实习，做后台接口，经常涉及到对数据库的修改，发现数据库执行语句基本上PreparedStatement代替了 Statement (学生时代经常接触的，看样子公司用的跟学校学的还真不一样），当我好好查看这个函数后，也发现这个函数有很多优点： 最明显的是代码可读性比较强PreparedStatement用法 123456789String sql = &amp;quot;&amp;quot;;Prepar">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-statement和preparedstatement学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Statement和PreparedStatement学习笔记
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2013/08/21/statement和preparedstatement学习笔记/">
+            <time datetime="2013-08-21T15:53:53.000Z" itemprop="datePublished">2013-08-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/畅游互联网/">畅游互联网</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/数据库/">数据库</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>最近在公司实习，做后台接口，经常涉及到对数据库的修改，发现数据库执行语句基本上PreparedStatement代替了 Statement (学生时代经常接触的，看样子公司用的跟学校学的还真不一样），当我好好查看这个函数后，也发现这个函数有很多优点：</p>
+<h2 id="最明显的是代码可读性比较强"><a href="#最明显的是代码可读性比较强" class="headerlink" title="最明显的是代码可读性比较强"></a>最明显的是代码可读性比较强</h2><p>PreparedStatement用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;&quot;;</span><br><span class="line">PreparedStatement ps = null;</span><br><span class="line">sql=&quot;insert into test(id,name) values(?,?)&quot;;</span><br><span class="line">ps = conn.prepareStatement(sql);</span><br><span class="line">ps.setInt(1, id);</span><br><span class="line">ps.setString(2, word);</span><br><span class="line">rc=ps.executeUpdate();</span><br><span class="line">ps.close();</span><br><span class="line">ps=null;</span><br></pre></td></tr></table></figure>
+<p>Statement用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Statement stmt = con.createStatement();</span><br><span class="line">ResultSet rs = stmt.executeQuery(&quot;SELECT a, b, c FROM Table2&quot;);</span><br></pre></td></tr></table></figure>
+<p>代码上面的比下面代码虽然多了几行，其可读性和可维护性还是要高不少。</p>
+<h2 id="当然是用PreparedStatement-在性能也有一个很大的提升"><a href="#当然是用PreparedStatement-在性能也有一个很大的提升" class="headerlink" title="当然是用PreparedStatement 在性能也有一个很大的提升"></a>当然是用PreparedStatement 在性能也有一个很大的提升</h2><p>一个数据库怎样执行一条语句? 当一个数据库系统接收到一条sql语句的时候,数据库引擎首先解析这条语句, 查看语法错误. 一 旦语句解析了, 数据库需要找出最有效的方法来执行这条语句. 这个计算起来代价很大. 数据库检查什么索引(如果有 的话)能有所帮助, 或者它是否能全部读出一张表中所有的记录. 数据库根据这些关于数据库所 存数据的统计数字来找出最好的办法. 一旦制订出查询方案, 就可以由数据库引擎来执行. 需要 CPU 来产生访问方案. 想的情况, 如果我们把相同的语句给数据库发送两次, 我们期望 数据库重用第一条记录的访问方案. 这会比第二次重新产生方案要使用较少的 CPU. 语句缓冲数据库可以进行调节来做语句缓冲. 通常包含一些类型的语句缓冲. 缓冲使用语句本身作为关键 字, 访问方案和相应的语句存储在缓冲区中. 这样就允许数据库引擎对以前执行过的语句所使用 的访问方案进行重用.当先后两条执行的sql语句相同时，例如都是执行”select a,b from test where c=3”时，第二次就能直接调用缓冲区的访问方案，但是当执行”select a,b from test where c=6”就不能再用之前的访问方案了，<br>PreparedStatement 就解决了这一难题，因为用户sql语句只是参数不一样，就可以完全用一个访问方案 ，这种预编译策略,对于批量处理可以大大提高效率. 也叫JDBC存储过程。</p>
+<h2 id="同时PreparedStatement-还解决了Statement可被注入的问题"><a href="#同时PreparedStatement-还解决了Statement可被注入的问题" class="headerlink" title="同时PreparedStatement 还解决了Statement可被注入的问题"></a>同时PreparedStatement 还解决了Statement可被注入的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;select * from account where name= &apos;&quot;+varname+&quot;&apos; and passwd=&apos;&quot;+varpasswd+&quot;&apos;&quot;;</span><br></pre></td></tr></table></figure>
+<p>有些黑客会将varname=“xxx”  和varpasswd=“’ and ‘1’=‘1’”传进来<br>这个可执行的语句就变成select * from tb_name = ‘xxx’ and passwd = ‘’ or ‘1’ = ‘1’;这一不管怎样都是验证通过的。<br>而用PreparedStatement 就不一样，因为键和值是一一对应，非法参数在字符处理的时候就会显出原形。</p>
+<h2 id="碰上个伤头脑的问题"><a href="#碰上个伤头脑的问题" class="headerlink" title="碰上个伤头脑的问题"></a>碰上个伤头脑的问题</h2><p>今天一下午在这段代码上花了我两个多小时，百思不得其解，问了公司的几个技术牛人都没解决，回家网上查了下，瞬间解决了，心中很是欢喜。同时也觉得挺对不起公司同事，我自己一个小小的编码错误页浪费了他们不少时间，sorry<br>当时报的错误是<br>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘?)’ at line 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;&quot;;</span><br><span class="line">PreparedStatement ps = null;</span><br><span class="line">sql=&quot;insert into test(id,name) values(?,?)&quot;;</span><br><span class="line">ps = conn.prepareStatement(sql);</span><br><span class="line">ps.setInt(1, id);</span><br><span class="line">ps.setString(2, word);</span><br><span class="line">rc=ps.executeUpdate(sql);</span><br><span class="line">ps.close();</span><br><span class="line">ps=null;</span><br></pre></td></tr></table></figure><br>解决方法就是去掉 rc=ps.executeUpdate();的参数sql<br>如果你写成rc=ps.executeUpdate(sql);这种写法就会按照Statement 的处理方法,而不是按照PreparedStatement预处理语句的方法。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2013/08/21/statement和preparedstatement学习笔记/" data-id="cjbc9suzn002cyoqb9iiopud3" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2013/08/22/json学习笔记之拼装第一个json/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    JSON学习笔记之拼装第一个json
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2013/08/21/关于android开发环境的创建/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">关于android开发环境的创建 </div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

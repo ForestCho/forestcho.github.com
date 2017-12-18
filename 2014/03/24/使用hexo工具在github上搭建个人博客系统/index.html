@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>使用Hexo工具在Github上搭建个人博客系统 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前奏不宜太长最近一两个星期发现自己已经深深的坠入linux的爱河中，一直在不断的学习linux，自己这台破机装的是linux和windows的双系统，现在只要开机都会自动选择进入linux系统。现在想想windows真没有我值得留恋的地方，不玩游戏只浏览网页和看电影在linux下面足够了，再者配置低的机子在windows下面跑的很慢。  前天在弄nodejs，昨天又看到一个叫hexo的好玩的东西，">
+<meta name="keywords" content="hexo,linux,博客,markdown,域名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hexo工具在Github上搭建个人博客系统">
+<meta property="og:url" content="http://38sr.com/2014/03/24/使用hexo工具在github上搭建个人博客系统/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前奏不宜太长最近一两个星期发现自己已经深深的坠入linux的爱河中，一直在不断的学习linux，自己这台破机装的是linux和windows的双系统，现在只要开机都会自动选择进入linux系统。现在想想windows真没有我值得留恋的地方，不玩游戏只浏览网页和看电影在linux下面足够了，再者配置低的机子在windows下面跑的很慢。  前天在弄nodejs，昨天又看到一个叫hexo的好玩的东西，">
+<meta property="og:image" content="http://38sr.com/pic/binddomain.png">
+<meta property="og:updated_time" content="2014-04-13T05:00:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Hexo工具在Github上搭建个人博客系统">
+<meta name="twitter:description" content="前奏不宜太长最近一两个星期发现自己已经深深的坠入linux的爱河中，一直在不断的学习linux，自己这台破机装的是linux和windows的双系统，现在只要开机都会自动选择进入linux系统。现在想想windows真没有我值得留恋的地方，不玩游戏只浏览网页和看电影在linux下面足够了，再者配置低的机子在windows下面跑的很慢。  前天在弄nodejs，昨天又看到一个叫hexo的好玩的东西，">
+<meta name="twitter:image" content="http://38sr.com/pic/binddomain.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-使用hexo工具在github上搭建个人博客系统" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            使用Hexo工具在Github上搭建个人博客系统
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/03/24/使用hexo工具在github上搭建个人博客系统/">
+            <time datetime="2014-03-24T01:20:50.000Z" itemprop="datePublished">2014-03-24</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/hexo/">hexo</a>, <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/markdown/">markdown</a>, <a class="tag-link" href="/tags/博客/">博客</a>, <a class="tag-link" href="/tags/域名/">域名</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="前奏不宜太长"><a href="#前奏不宜太长" class="headerlink" title="前奏不宜太长"></a>前奏不宜太长</h2><p>最近一两个星期发现自己已经深深的坠入linux的爱河中，一直在不断的学习linux，自己这台破机装的是linux和windows的双系统，现在只要开机都会自动选择进入linux系统。现在想想windows真没有我值得留恋的地方，不玩游戏只浏览网页和看电影在linux下面足够了，再者配置低的机子在windows下面跑的很慢。<br></p>
+
+<p>前天在弄nodejs，昨天又看到一个叫hexo的好玩的东西，hexo可以理解为一种静态网页生成器，静态网页在浏览时速度会明显加快，其次爬虫比较钟意静态网页。当然hexo搭建的博客系统也可以自定义主题。<br></p>
+
+<p>想在hexo博客下面写下第一篇，以记录博客的搭建过程和熟悉Markdown这种书写方式。<br></p>
+
+<hr>
+<h2 id="Hexo要求环境"><a href="#Hexo要求环境" class="headerlink" title="Hexo要求环境"></a>Hexo要求环境</h2><ul>
+<li>Git </li>
+<li>NodeJs</li>
+<li>Github帐号(可以用其他，很多人已经在bae和gitCafe上面搭建了)</li>
+</ul>
+<hr>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo </span><br></pre></td></tr></table></figure>
+<p>NPM全程Node Package Manager,是NodeJs的包管理器</p>
+<hr>
+<h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><p>建立一个blog的文件夹<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir blog</span><br><span class="line">cd blog</span><br></pre></td></tr></table></figure><br>然后<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="生成-amp-预览"><a href="#生成-amp-预览" class="headerlink" title="生成&amp;预览"></a>生成&amp;预览</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>也可以用以下简写命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure><br>这时用浏览器打开<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 预览博客</p>
+<hr>
+<h2 id="修改发布方式"><a href="#修改发布方式" class="headerlink" title="修改发布方式"></a>修改发布方式</h2><p>当你需要发布到Github上面去，需要在_config.yml中添加一下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: github</span><br><span class="line">  repository: https://github.com/ForestCho/cslblog.github.com.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<h2 id="发布到GitHub"><a href="#发布到GitHub" class="headerlink" title="发布到GitHub"></a>发布到GitHub</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>也可以用简写命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><br>输入命令后一次输入你的GitHub帐号和密码即可</p>
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="信息修改"><a href="#信息修改" class="headerlink" title="信息修改"></a>信息修改</h3><p>可以在_config.yml中修改这些选项设置博客的基本信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Forest&apos;s Blog</span><br><span class="line">subtitle:</span><br><span class="line">description: Forest&apos;s Blog</span><br><span class="line">author: Forest</span><br><span class="line">email: caosl158@gmail.com</span><br><span class="line">language: ch</span><br><span class="line"></span><br><span class="line">## URL</span><br><span class="line">## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;</span><br><span class="line">url: http://wiki.yidongzhifu.net</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br></pre></td></tr></table></figure></p>
+<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>直接初始化时的主题为<code>landscape</code>，<a href="https://github.com/tommy351/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/tommy351/hexo/wiki/Themes</a>这里聚集了不少主题,<br>如果想要安装一个pacman的主题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/A-limon/pacman.git themes/pacman</span><br></pre></td></tr></table></figure><br>然后将_config.yml中的theme修改为:pacman<br>接着在进行生成预览操作就可以,如果发现没效果，可以<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -rf public</span><br><span class="line">hexo clean</span><br></pre></td></tr></table></figure></p>
+<h3 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h3><p>如果需要绑定域名</p>
+<ol>
+<li>需要先讲域名解析到<code>forestcho.github.io</code>,或者<code>103.245.222.133</code>(通过ping forestcho.github.io 获得的)<br><img src="/pic/binddomain.png" alt="Alt text" title="Optional title"></li>
+<li>在sourse下面新建一个内容为需要解析的域名的CNAME(无后缀)文件,<br>例如我的就是wiki.yidongzhifu.net<br>这个过程结束后大概需要十多分钟才能生效，听两首歌曲放松下。</li>
+</ol>
+<h3 id="特别提醒"><a href="#特别提醒" class="headerlink" title="特别提醒"></a>特别提醒</h3><ol>
+<li>当你在github上建立一个repositories的时候,应该命名为<code>gitusername.github.com</code></li>
+<li>更换主题的时候，在_config.yml里设置主题的名字是有大小写之分的,例如pacmanblue&gt;和pacmanBlue是不一样的</li>
+<li>当你对所用主题做了修改时，应进行如下操作以便能看到你想要的结果<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -rf public</span><br><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="涉及链接"><a href="#涉及链接" class="headerlink" title="涉及链接"></a>涉及链接</h2><ul>
+<li><a href="http://wowubuntu.com/markdown/#philosophy" target="_blank" rel="noopener">Markdown入门语法说明</a></li>
+<li><a href="http://zespia.tw/hexo/docs/" target="_blank" rel="noopener">Hexo用法文档</a></li>
+<li><a href="https://github.com/youfei/pacmanBlue" target="_blank" rel="noopener">本博客所用主题pacmanBlue</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2014/03/24/使用hexo工具在github上搭建个人博客系统/" data-id="cjbc9sv0e002vyoqbh7zf1la7" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/03/25/抛弃wordpress正式用hexo-迁徙之路/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    抛弃Wordpress正式用Hexo-迁徙之路
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/03/20/ubuntu下配置github出现的端口问题/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">ubuntu下配置github出现的端口问题</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

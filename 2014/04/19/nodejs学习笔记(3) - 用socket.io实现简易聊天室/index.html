@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>nodejs学习笔记(3) - 用socket.io实现简易聊天室 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在一大侠的blog中看到他用socket.io做了一个网络聊天室，就照着大侠的方法自己也做了一个．Socket.io旨在在不同版本，不同终端的浏览器之间实现实时通信,为了实现在不同浏览器间实时通信，socket.io会从WebSocket,AjAX long polling,Forever iframe中选择一种最有的通信方法．支持IE5.5+,Safari 3+.Chrome 4+,firefo">
+<meta name="keywords" content="express,nodejs,socket.io">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs学习笔记(3) - 用socket.io实现简易聊天室">
+<meta property="og:url" content="http://38sr.com/2014/04/19/nodejs学习笔记(3) - 用socket.io实现简易聊天室/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在一大侠的blog中看到他用socket.io做了一个网络聊天室，就照着大侠的方法自己也做了一个．Socket.io旨在在不同版本，不同终端的浏览器之间实现实时通信,为了实现在不同浏览器间实时通信，socket.io会从WebSocket,AjAX long polling,Forever iframe中选择一种最有的通信方法．支持IE5.5+,Safari 3+.Chrome 4+,firefo">
+<meta property="og:image" content="http://38sr.com/pic/socket1.png">
+<meta property="og:image" content="http://38sr.com/pic/socket2.png">
+<meta property="og:updated_time" content="2016-02-21T12:36:01.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs学习笔记(3) - 用socket.io实现简易聊天室">
+<meta name="twitter:description" content="在一大侠的blog中看到他用socket.io做了一个网络聊天室，就照着大侠的方法自己也做了一个．Socket.io旨在在不同版本，不同终端的浏览器之间实现实时通信,为了实现在不同浏览器间实时通信，socket.io会从WebSocket,AjAX long polling,Forever iframe中选择一种最有的通信方法．支持IE5.5+,Safari 3+.Chrome 4+,firefo">
+<meta name="twitter:image" content="http://38sr.com/pic/socket1.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-nodejs学习笔记(3) - 用socket.io实现简易聊天室" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            nodejs学习笔记(3) - 用socket.io实现简易聊天室
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/04/19/nodejs学习笔记(3) - 用socket.io实现简易聊天室/">
+            <time datetime="2014-04-19T07:12:32.000Z" itemprop="datePublished">2014-04-19</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/express/">express</a>, <a class="tag-link" href="/tags/nodejs/">nodejs</a>, <a class="tag-link" href="/tags/socket-io/">socket.io</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>在一大侠的blog中看到他用socket.io做了一个网络聊天室，就照着大侠的方法自己也做了一个．Socket.io旨在在不同版本，不同终端的浏览器之间实现实时通信,为了实现在不同浏览器间实时通信，socket.io会从WebSocket,AjAX long polling,Forever iframe中选择一种最有的通信方法．支持IE5.5+,Safari 3+.Chrome 4+,firefox 3+,Opera 10+等桌面浏览器和Iphone Safari,iPad Safari,Android Webkit,WebOs webkit等手机浏览器．</p>
+<h2 id="建立express工程和socket-io"><a href="#建立express工程和socket-io" class="headerlink" title="建立express工程和socket.io"></a>建立express工程和socket.io</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir socketio</span><br><span class="line">cd socketio</span><br><span class="line">express -e</span><br><span class="line">npm install socket.io</span><br></pre></td></tr></table></figure>
+<h2 id="先运行下socket-io官网的代码"><a href="#先运行下socket-io官网的代码" class="headerlink" title="先运行下socket.io官网的代码"></a>先运行下socket.io官网的代码</h2><p>修改app.js,增加如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/&apos;, function(req,res)&#123;</span><br><span class="line">res.sendfile(__dirname+&apos;/client/index.html&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">var server=http.createServer(app);</span><br><span class="line">server.listen(80);</span><br><span class="line">var io = require(&apos;socket.io&apos;).listen(server);</span><br><span class="line"></span><br><span class="line">io.sockets.on(&apos;connection&apos;, function (socket) &#123;</span><br><span class="line">  socket.emit(&apos;news&apos;, &#123; hello: &apos;world&apos; &#125;);</span><br><span class="line">  socket.on(&apos;my other event&apos;, function (data) &#123;</span><br><span class="line">    console.log(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>建立一个client的文件夹，并在里面创建一个index.html的文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;/socket.io/socket.io.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var socket = io.connect(&apos;http://localhost&apos;);</span><br><span class="line">  socket.on(&apos;news&apos;, function (data) &#123;</span><br><span class="line">    console.log(data);</span><br><span class="line">    socket.emit(&apos;my other event&apos;, &#123; my: &apos;data&apos; &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在这个例子中只要客户端连接上，服务器端就会发送一个news事件的消息－＞客户端接收到news事件后–&gt;打印消息并发送一个my other event事件的消息－＞服务器端接收到这个my other event事件后就将其打印出来<br><img src="/pic/socket1.png" alt="Alt text" title="Optional title"></p>
+<h2 id="socket-io相关"><a href="#socket-io相关" class="headerlink" title="socket.io相关"></a>socket.io相关</h2><p>1.socket.io 有connect，message，disconnect三个常用的基本事件，用户可以自定义自己的事件，我这个学习demo中就有isopen,system自定义的事件<br>2.socket.send方法默认是message事件发送消息<br>3.socket.emit(action, data, function)为发送事件的方法,可以发送一个空事件过去,socket.emit(‘isopen’);<br>4.socket.on(action,function)为接受事件的方法,也可以接受一个空事件,socket.on(‘isopen’,function(){});</p>
+<h2 id="聊天室"><a href="#聊天室" class="headerlink" title="聊天室"></a>聊天室</h2><h3 id="服务器app-js"><a href="#服务器app-js" class="headerlink" title="服务器app.js"></a>服务器app.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/socket&apos;,function(req,res)&#123;</span><br><span class="line">res.sendfile(__dirname+&apos;/client/index.html&apos;)</span><br><span class="line">&#125;);</span><br><span class="line">var server=require(&apos;http&apos;).createServer(app);</span><br><span class="line">server.listen(80);</span><br><span class="line">var io=require(&apos;socket.io&apos;).listen(server);</span><br><span class="line"></span><br><span class="line">io.sockets.on(&apos;connection&apos;,function(socket)&#123;</span><br><span class="line">var client=&#123;</span><br><span class="line">        name:false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 发送一个打开socket的消息信号</span><br><span class="line">socket.emit(&apos;isopen&apos;);</span><br><span class="line">socket.on(&apos;message&apos;,function(data)&#123;</span><br><span class="line">        if(!client.name)&#123;</span><br><span class="line">        var sysmsgobj = &#123;</span><br><span class="line">                time:getTime(),</span><br><span class="line">                name:data,</span><br><span class="line">                type:&apos;connect&apos;</span><br><span class="line">                &#125;;</span><br><span class="line">                client.name=data;</span><br><span class="line">                socket.emit(&apos;system&apos;,sysmsgobj);</span><br><span class="line">                socket.broadcast.emit(&apos;system&apos;,sysmsgobj);</span><br><span class="line">                console.log(&apos;login&apos;+sysmsgobj.name);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">                var msgobj = &#123;time:getTime()&#125;;</span><br><span class="line">                msgobj[&apos;name&apos;]=client.name;</span><br><span class="line">                msgobj[&apos;content&apos;]=data;</span><br><span class="line">                msgobj[&apos;type&apos;]=&apos;message&apos;;</span><br><span class="line">                socket.emit(&apos;message&apos;,msgobj);</span><br><span class="line">                socket.broadcast.emit(&apos;message&apos;,msgobj);</span><br><span class="line">                console.log(&apos;new message&apos;,msgobj);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(&apos;disconnect&apos;,function()&#123;</span><br><span class="line"> var sysmsgobj = &#123;</span><br><span class="line">                time:getTime(),</span><br><span class="line">                name:client.name,</span><br><span class="line">                type:&apos;disconnect&apos;</span><br><span class="line">                &#125;;</span><br><span class="line">                socket.emit(&apos;system&apos;,sysmsgobj);</span><br><span class="line">                socket.broadcast.emit(&apos;system&apos;,sysmsgobj);</span><br><span class="line">                console.log(sysmsgobj.name+&apos;is logout&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br><span class="line">var getTime=function()&#123;</span><br><span class="line">        var dt=new Date();</span><br><span class="line">        return dt.getHours()+&quot;:&quot;+dt.getMinutes()+&quot;:&quot;+dt.getSeconds();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="客户端chat-js"><a href="#客户端chat-js" class="headerlink" title="客户端chat.js"></a>客户端chat.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"> $(function () &#123;</span><br><span class="line">socket = io.connect(&apos;http://localhost&apos;);</span><br><span class="line">var msgbox=$(&apos;#msgbox&apos;);</span><br><span class="line">var input=$(&apos;#input&apos;);</span><br><span class="line">var name=$(&apos;#name&apos;);</span><br><span class="line">var issetname = false;</span><br><span class="line">socket.on(&apos;isopen&apos;,function()&#123;</span><br><span class="line">        name.text(&apos;please enter a name&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//接受系统消息</span><br><span class="line">socket.on(&apos;system&apos;,function(systemdata)&#123;</span><br><span class="line">if(systemdata.type == &apos;connect&apos;)&#123;</span><br><span class="line">        var p = &apos;&lt;p  style=&quot;color:#445566;line-height: 90%;margin:2px 0px 0px 0px&quot;&gt;&apos;+systemdata.time+&apos;-&apos;+systemdata.name+&apos; join us&apos;+&apos;&lt;/p&gt;&apos;;</span><br><span class="line">        if(issetname==systemdata.name)&#123;</span><br><span class="line">        name.text(issetname); </span><br><span class="line">        &#125;</span><br><span class="line">&#125;else if(systemdata.type == &apos;disconnect&apos;)&#123;</span><br><span class="line">        var p = &apos;&lt;p  style=&quot;color:#445566;line-height: 90%;margin:2px 0px 0px 0px&quot;&gt;&apos;+systemdata.time+&apos;-&apos;+systemdata.name+&apos; left&apos;+&apos;&lt;/p&gt;&apos;;</span><br><span class="line">&#125;</span><br><span class="line">msgbox.prepend(p);</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(&apos;message&apos;, function (msgobj) &#123;</span><br><span class="line">        console.log(&apos;receive:&apos;+msgobj);</span><br><span class="line">        var p = &apos;&lt;p  style=&quot;color:#445566;line-height: 90%;margin:2px 0px 0px 0px&quot;&gt;&apos;+msgobj.time+&apos;-&apos;+msgobj.name+&apos;:&apos;+msgobj.content+&apos;&lt;/p&gt;&apos;;</span><br><span class="line">        msgbox.prepend(p);</span><br><span class="line">&#125;); </span><br><span class="line">//接受系统消息</span><br><span class="line">socket.on(&apos;system&apos;,function(systemdata)&#123;</span><br><span class="line">if(systemdata.type == &apos;connect&apos;)&#123;</span><br><span class="line">        var p = &apos;&lt;p  style=&quot;color:#445566;line-height: 90%;margin:2px 0px 0px 0px&quot;&gt;&apos;+systemdata.time+&apos;-&apos;+systemdata.name+&apos; join us&apos;+&apos;&lt;/p&gt;&apos;;</span><br><span class="line">        if(issetname==systemdata.name)&#123;</span><br><span class="line">        name.text(issetname); </span><br><span class="line">        &#125;</span><br><span class="line">&#125;else if(systemdata.type == &apos;disconnect&apos;)&#123;</span><br><span class="line">        var p = &apos;&lt;p  style=&quot;color:#445566;line-height: 90%;margin:2px 0px 0px 0px&quot;&gt;&apos;+systemdata.time+&apos;-&apos;+systemdata.name+&apos; left&apos;+&apos;&lt;/p&gt;&apos;;</span><br><span class="line">&#125;</span><br><span class="line">msgbox.prepend(p);</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(&apos;message&apos;, function (msgobj) &#123;</span><br><span class="line">        console.log(&apos;receive:&apos;+msgobj);</span><br><span class="line">        var p = &apos;&lt;p  style=&quot;color:#445566;line-height: 90%;margin:2px 0px 0px 0px&quot;&gt;&apos;+msgobj.time+&apos;-&apos;+msgobj.name+&apos;:&apos;+msgobj.content+&apos;&lt;/p&gt;&apos;;</span><br><span class="line">        msgbox.prepend(p);</span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">//通过“回车”提交聊天信息</span><br><span class="line">input.keydown(function(e) &#123;</span><br><span class="line">        if (e.keyCode === 13) &#123; </span><br><span class="line">            var msg = $(this).val();</span><br><span class="line">            socket.send(msg);</span><br><span class="line">            $(this).val(&apos;&apos;);</span><br><span class="line">            console.log(msg);</span><br><span class="line">            if(issetname === false)&#123;</span><br><span class="line">                issetname=msg;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="客户端显示index-html"><a href="#客户端显示index-html" class="headerlink" title="客户端显示index.html"></a>客户端显示index.html</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;socket.io&lt;/title&gt;</span><br><span class="line">&lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src=&quot;javascripts/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;/socket.io/socket.io.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;javascripts/chat.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;socket demo&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;socket demo&lt;/p&gt;</span><br><span class="line">&lt;span id=&quot;name&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; id=&quot;input&quot; /&gt;</span><br><span class="line">&lt;div id=&quot;msgbox&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="/pic/socket2.png" alt="Alt text" title="Optional title"></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>1.其中出现error raised: Error: listen EADDRINUSE，后来发现是端口的问题,开了多个node出现的</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2014/04/19/nodejs学习笔记(3) - 用socket.io实现简易聊天室/" data-id="cjbc9suza0025yoqb4g2v7iao" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/05/05/mondrian+Oracle+Jpviot建立web工程/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    Mondrian+Oracle+Jpivot建立web工程
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/04/13/粒子群算法(Particle_swarm_optimization)学习/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">粒子群算法(Particle swarm optimization)学习</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

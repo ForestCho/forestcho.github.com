@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://38sr.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main">
+    <article id="post-小记" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/05/19/小记/">小记</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/05/19/小记/">
+            <time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>今天进了四个机房，刚回到办事处，带着学的态度进机房，一路上都没感觉到累的，即时同事都说累</p>
+<p>见的人多了，就会发现人的不一样，有人对工作表现的很随意，过了今天可以不考虑明天，有人很严谨，思前想后。</p>
+<p>有的人有学习的机会不会努力去学，有的人没机会却想尽办法学习(最近一修电视机的表达了强烈的学习欲望，修电视机一个月没修好都没抱怨，反倒是说自己修的过程中学到了很多东西，不吃亏)。</p>
+<p>有的人为了蝇头小利不惜厚脸皮的索取交易范围外的，有些做好本职工作反而会获得将来更多的利润。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2016/05/19/小记/" data-id="cjbc9sv1n003yyoqbz6j9wlbv" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-用nodejs模拟v2ex登录并获取福利" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/">用nodejs模拟v2ex登录并获取福利</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/">
+            <time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/nodejs/">nodejs</a>, <a class="tag-link" href="/tags/爬虫/">爬虫</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>上一篇日记讲的用nodejs模拟一个简单的网站登录并发帖，当碰到v2ex这种有经验的网站就需要懂点脑筋。</p>
+<h3 id="模拟思路"><a href="#模拟思路" class="headerlink" title="模拟思路"></a>模拟思路</h3><p>想用node模拟拿到v2ex的福利需要经过如下几步:</p>
+<ol>
+<li>访问<code>http://v2ex.com/signin</code>,拿到隐藏的once和当前页面的cookie<br><img src="/pic/monidenglu/v2ex.jpg" alt=""></li>
+<li><p>用拿到的cookie和once，添加账户和密码post<code>http://v2ex.com/signin</code>页面，结束后组合新设置的cookie，每一次都必须保持cookie的完整性才能走下一步。<br>此时的cookie</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie:PB3_SESSION=&quot;2|1:0|10:1456402302|11:PB3_SESSION|36:djJleDoxODMuNjAuOTAuODI6NDc3MzEwMDY=|756ddc25710006ff35e3cf0a5939cea49f1873cf2b6b2d5f53f0f1e3f9596fb4&quot;; _gat=1; _ga=GA1.2.1026641497.1456402470; A2=&quot;2|1:0|10:1456402318|2:A2|56:MjI3MDQ0NDJmM2QxMDVhYzQ1M2ZiOGNmNzg4NWI1ZDEzZGM5NzY3ZQ==|050c5d97a7d20a74e9f4d29005d84616401fc0cbf055c90e44efe01d6d4a38b6&quot;; V2EX_LANG=zhcn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>已经拿到登录的cookie，按照常理这一步就应该访问<code>http://v2ex.com/mission/daily</code>页面获取福利，这是你会发现v2ex提醒你说<code>你的浏览器有些奇奇怪怪的设置，请换一个干净的浏览器</code>,原来的cookie的信息不完整。缺少如下信息:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V2EX_TAB=&quot;2|1:0|10:1456402318|8:V2EX_TAB|8:dGVjaA==|7a47087a9137bc9476f0c222a2723a058eb6e44a9f5f5a8600441ae9d5c92589&quot;; expires=Thu, 10 Mar 2016 12:11:58 GMT; Path=/</span><br></pre></td></tr></table></figure>
+<p> 而这些信息需要访问首页才能拿到，这时候可以访问<code>http://v2ex.com</code>拿到缺少的信息，访问首页还可以获取最新的<code>once</code>,因为登录后这个<code>once</code>就变了，同时还可以测试是否登录，因为登录了顶部栏会显示用户的名称。</p>
+</li>
+<li>所有的准备工作都做好了，访问<code>/mission/daily/redeem?once=</code>还是不行，用抓包工作或者浏览器都可以看到原来访问这个地址后返回<code>302</code>，然后立马访问<code>http://v2ex.com/mission/daily</code>.这时所有的谜团才揭开，出现成功领取福利的提示。<br><img src="/pic/monidenglu/v2ex-1.jpg" alt=""></li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>复制下面的代码或者直接从github上面取<a href="https://github.com/ForestCho/node-v2ex" target="_blank" rel="noopener">node-v2ex</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">var EventProxy = require(&apos;eventproxy&apos;),</span><br><span class="line">  superagent = require(&apos;superagent&apos;),</span><br><span class="line">  cheerio = require(&apos;cheerio&apos;),</span><br><span class="line">  loginUrl = &apos;http://v2ex.com/signin&apos;,</span><br><span class="line">  baseUrl = &apos;http://v2ex.com&apos;,</span><br><span class="line">  dairyMissionUrl = &apos;http://v2ex.com/mission/daily&apos;,</span><br><span class="line">  redeem = baseUrl + &apos;/mission/daily/redeem?once=&apos;;</span><br><span class="line">var ep = new EventProxy();</span><br><span class="line"></span><br><span class="line">var formData = &#123;</span><br><span class="line">  &apos;u&apos;: &apos;name@gmail.com&apos;,</span><br><span class="line">  &apos;p&apos;: &apos;123455&apos;,</span><br><span class="line">  &apos;once&apos;: &apos;61048&apos;,</span><br><span class="line">  &apos;next&apos;: &apos;/mission/daily&apos;</span><br><span class="line">&#125;;</span><br><span class="line">var headers = &#123;</span><br><span class="line">  &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded&apos;,</span><br><span class="line">  Host: &apos;v2ex.com&apos;,</span><br><span class="line">  Origin: &apos;http://v2ex.com&apos;,</span><br><span class="line">  Referer: &apos;http://v2ex.com/signin&apos;,</span><br><span class="line">  &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0&apos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var headers2 = &#123;</span><br><span class="line">  &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&apos;,</span><br><span class="line">  &apos;Accept-Encoding&apos;: &apos;gzip,deflate,sdch&apos;,</span><br><span class="line">  &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.8&apos;,</span><br><span class="line">  &apos;Proxy-Connection&apos;: &apos;keep-alive&apos;,</span><br><span class="line">  &apos;Host&apos;: &apos;v2ex.com&apos;,</span><br><span class="line">  &apos;Referer&apos;: &apos;http://v2ex.com/mission/daily&apos;,</span><br><span class="line">  &apos;Upgrade-Insecure-Requests&apos;: 1,</span><br><span class="line">  &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0&apos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var ep = new EventProxy();</span><br><span class="line"></span><br><span class="line">var cookie = null;</span><br><span class="line"></span><br><span class="line">console.log(&apos;登录中...\n此过程你有被封IP的危险...&apos;);</span><br><span class="line">superagent</span><br><span class="line">  .get(loginUrl)</span><br><span class="line">  .set(headers)</span><br><span class="line">  .end(function(err, res) &#123;</span><br><span class="line">    $ = cheerio.load(res.text);</span><br><span class="line">    var iptonce = $(&apos;input&apos;);</span><br><span class="line">    formData.once = iptonce[3].attribs.value;</span><br><span class="line">    var setPreCookie = res.headers[&apos;set-cookie&apos;];</span><br><span class="line">    cookie = setPreCookie[0] + &quot;;&quot; + setPreCookie[1];</span><br><span class="line">    superagent</span><br><span class="line">      .post(loginUrl)</span><br><span class="line">      .set(headers)</span><br><span class="line">      .set(&apos;Cookie&apos;, cookie)</span><br><span class="line">      .type(&apos;form&apos;)</span><br><span class="line">      .send(formData)</span><br><span class="line">      .redirects(0)</span><br><span class="line">      .end(function(err, result) &#123;</span><br><span class="line">        if (typeof(result) == &apos;undefined&apos;) &#123;</span><br><span class="line">          console.log(&quot;登录失败\n&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          var setLoginCookie = result.headers[&apos;set-cookie&apos;];</span><br><span class="line">          if (typeof(setLoginCookie) == &apos;undefined&apos;) &#123;</span><br><span class="line">            console.log(&quot;登录失败\n&quot;);</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">            cookie = setLoginCookie[0] + &quot;;&quot; + setLoginCookie[1] + &quot;;&quot; + cookie;</span><br><span class="line">            ep.emit(&quot;cookie&quot;, cookie);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//访问首页判断是否成功，并获取相对应的cookie信息</span><br><span class="line">ep.on(&quot;cookie&quot;, function(cookie) &#123;</span><br><span class="line">  console.log(&apos;测试是否登陆成功中...&apos;);</span><br><span class="line">  superagent</span><br><span class="line">    .get(baseUrl)</span><br><span class="line">    .set(headers)</span><br><span class="line">    .set(&apos;Cookie&apos;, cookie)</span><br><span class="line">    .end(function(err, res) &#123;</span><br><span class="line"></span><br><span class="line">      var setTabCookie = res.headers[&apos;set-cookie&apos;];</span><br><span class="line">      var fulicookie = setTabCookie[0] + &quot;;&quot; + setTabCookie[1] + &quot;;&quot; + cookie;</span><br><span class="line">      $ = cheerio.load(res.text);</span><br><span class="line">      var name = $(&apos;.top&apos;)[1].children[0].data;</span><br><span class="line">      console.log(name + &quot;登录成功&quot;);</span><br><span class="line">      var temp = res.text;</span><br><span class="line">      var fuliurl = redeem + res.text.substr(res.text.indexOf(&apos;once&apos;) + 5, 5);</span><br><span class="line">      ep.emit(&quot;fuliurl&quot;, fuliurl);</span><br><span class="line">      ep.emit(&quot;fulicookie&quot;, fulicookie);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//访问福利网址</span><br><span class="line">ep.all(&quot;fuliurl&quot;, &quot;fulicookie&quot;, function(fuliurl, fulicookie) &#123;</span><br><span class="line">  superagent</span><br><span class="line">    .get(fuliurl)</span><br><span class="line">    .set(headers2)</span><br><span class="line">    .redirects(0)</span><br><span class="line">    .set(&apos;Cookie&apos;, fulicookie)</span><br><span class="line">    .end(function(err, res) &#123;</span><br><span class="line">      superagent</span><br><span class="line">        .get(dairyMissionUrl)</span><br><span class="line">        .set(headers2)</span><br><span class="line">        .set(&apos;Cookie&apos;, cookie)</span><br><span class="line">        .end(function(err, res) &#123;</span><br><span class="line">          $ = cheerio.load(res.text);</span><br><span class="line">          console.log($(&apos;.message&apos;).text());</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2016/02/25/用nodejs模拟v2ex登录并获取福利/" data-id="cjbc9sv36004wyoqbq405uvwl" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-nodejs学习笔记(5) - nodejs模拟登录和发帖" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/">nodejs学习笔记(5) - nodejs模拟登录和发帖</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/">
+            <time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/nodejs/">nodejs</a>, <a class="tag-link" href="/tags/爬虫/">爬虫</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>爬虫是个有趣的东西，经常上V2EX，就像模拟登录然后自动领取每天的奖励，结果不行测试的过程中导致IP被封，还是等等吧，就找了个别的网站模拟下。</p>
+<h3 id="模拟登录使用到的模块"><a href="#模拟登录使用到的模块" class="headerlink" title="模拟登录使用到的模块"></a>模拟登录使用到的模块</h3><ol>
+<li>eventproxy流程控制</li>
+<li>superagent是一个轻量的Ajax API，服务器端（Node.js）客户端（浏览器端）均可使用,SuperAgent具有学习曲线低、使用简单、可读性好的特点,可作为客户端请求代理模块使用，当你想处理get,post,put,delete,head请求时，可以考虑使用SuperAgent。</li>
+<li>cheerio网页解析工具</li>
+</ol>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><h4 id="登录获取Cookie"><a href="#登录获取Cookie" class="headerlink" title="登录获取Cookie"></a>登录获取Cookie</h4><p>先用浏览器获取登录时的Header<br><img src="/pic/monidenglu/1.jpg" alt=""><br>定义一个尽可能详细的header，为了保护原网站，我打马赛克了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var  httpHeader = &#123;</span><br><span class="line">    &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded&apos;,</span><br><span class="line">    Host: &apos;xxx.xx&apos;,</span><br><span class="line">    Origin: &apos;http://xxx.xxx&apos;,</span><br><span class="line">    Referer: &apos;http://xxx.xxx/login/&apos;,</span><br><span class="line">    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0&apos;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>定义账户的POST数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var accountData = &#123;</span><br><span class="line">    email: &apos;ccccc@gmail.com&apos;,</span><br><span class="line">    password: &apos;ccccc&apos;,</span><br><span class="line">    remember: &apos;on&apos;,</span><br><span class="line">    from: &apos;/&apos;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/pic/monidenglu/3.jpg" alt=""><br>通过这个图可以发现登录后，浏览器会提交如图中的cookie，所以我需要模拟提交一个类似的cookie。<br>然后用<code>superagent</code>模拟登录，如果返回的result中包含<code>set-cookie</code>说明登录成功，然后组合成一个途中的cookie。只需要把<code>Set-Cookie</code>数组中的uid和password提取出来就可以。如果返回的result不存在或者set-cookie不存在则说明登录失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">superagent</span><br><span class="line">  .post(baseUrl)</span><br><span class="line">  .set(httpHeader)</span><br><span class="line">  .type(&apos;form&apos;)</span><br><span class="line">  .send(accountData)</span><br><span class="line">  .redirects(0)</span><br><span class="line">  .end(function(err, result) &#123; </span><br><span class="line">    if (typeof(result) == &apos;undefined&apos;) &#123;</span><br><span class="line">      console.log(&quot;登录失败&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      var setCookie = result.headers[&apos;set-cookie&apos;]; </span><br><span class="line">      if (typeof(setCookie) == &apos;undefined&apos;) &#123;</span><br><span class="line">        console.log(&quot;登录失败&quot;);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        var cookie = setCookie[0] + &quot;;&quot; + setCookie[1];</span><br><span class="line">        ep.emit(&quot;cookie&quot;, cookie);</span><br><span class="line">        console.log(accountData.email+&quot;登录成功&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="用获取的cookie发帖"><a href="#用获取的cookie发帖" class="headerlink" title="用获取的cookie发帖"></a>用获取的cookie发帖</h4><p>发帖时需要的数据方式也可以跟踪一个发帖过程获取，与登录不同的是需要添加新获取的cookie<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ep.on(&quot;cookie&quot;, function(cookie) &#123;</span><br><span class="line">  superagent</span><br><span class="line">    .post(&quot;http://youqu.de/topic/add&quot;)</span><br><span class="line">    .set(httpHeader)</span><br><span class="line">    .type(&apos;form&apos;)</span><br><span class="line">    .send(subData)</span><br><span class="line">    .set(&apos;Cookie&apos;, cookie)</span><br><span class="line">    .end(function(err, res) &#123;</span><br><span class="line">      $ = cheerio.load(res.text);</span><br><span class="line">      var screenName = $(&apos;.screen-name a&apos;).text(); </span><br><span class="line">      if(screenName.length &gt;0 )&#123;</span><br><span class="line">        console.log(&quot;成功&quot;);</span><br><span class="line">        console.log(screenName);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">var EventProxy = require(&apos;eventproxy&apos;),</span><br><span class="line">  superagent = require(&apos;superagent&apos;),</span><br><span class="line">  cheerio = require(&apos;cheerio&apos;),</span><br><span class="line">  baseUrl = &apos;http://youqu.de/login/&apos;;</span><br><span class="line"></span><br><span class="line">//账户数据和模拟浏览器的Header</span><br><span class="line">var accountData = &#123;</span><br><span class="line">    email: &apos;ccccc@gmail.com&apos;,</span><br><span class="line">    password: &apos;ccccc&apos;,</span><br><span class="line">    remember: &apos;on&apos;,</span><br><span class="line">    from: &apos;/&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  httpHeader = &#123;</span><br><span class="line">    &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded&apos;,</span><br><span class="line">    Host: &apos;xxx.xxx&apos;,</span><br><span class="line">    Origin: &apos;http://xxx.xxx&apos;,</span><br><span class="line">    Referer: &apos;http://xxx.xxx/login/&apos;,</span><br><span class="line">    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0&apos;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">//发帖时提交的数据</span><br><span class="line">var subData = &#123;</span><br><span class="line">  title: &apos;软绵绵的周日&apos;,</span><br><span class="line">  content: &apos;软绵绵的周日&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var ep = new EventProxy();</span><br><span class="line"></span><br><span class="line">//读取参数输入的账户数据</span><br><span class="line">var arguments = process.argv.splice(2);</span><br><span class="line">if (arguments.length == 2) &#123;</span><br><span class="line">  accountData.email = arguments[0];</span><br><span class="line">  accountData.password = arguments[1];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//获取cookie</span><br><span class="line">superagent</span><br><span class="line">  .post(baseUrl)</span><br><span class="line">  .set(httpHeader)</span><br><span class="line">  .type(&apos;form&apos;)</span><br><span class="line">  .send(accountData)</span><br><span class="line">  .redirects(0)</span><br><span class="line">  .end(function(err, result) &#123; </span><br><span class="line">    if (typeof(result) == &apos;undefined&apos;) &#123;</span><br><span class="line">      console.log(&quot;登录失败&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      var setCookie = result.headers[&apos;set-cookie&apos;]; </span><br><span class="line">      if (typeof(setCookie) == &apos;undefined&apos;) &#123;</span><br><span class="line">        console.log(&quot;登录失败&quot;);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        var cookie = setCookie[0] + &quot;;&quot; + setCookie[1];</span><br><span class="line">        ep.emit(&quot;cookie&quot;, cookie);</span><br><span class="line">        console.log(accountData.email+&quot;登录成功&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  //用账户发帖</span><br><span class="line">ep.on(&quot;cookie&quot;, function(cookie) &#123;</span><br><span class="line">  superagent</span><br><span class="line">    .post(&quot;http://xxx.xx/topic/add&quot;)</span><br><span class="line">    .set(httpHeader)</span><br><span class="line">    .type(&apos;form&apos;)</span><br><span class="line">    .send(subData)</span><br><span class="line">    .set(&apos;Cookie&apos;, cookie)</span><br><span class="line">    .end(function(err, res) &#123;</span><br><span class="line">      $ = cheerio.load(res.text);</span><br><span class="line">      var screenName = $(&apos;.screen-name a&apos;).text(); </span><br><span class="line">      if(screenName.length &gt;0 )&#123;</span><br><span class="line">        console.log(&quot;成功&quot;);</span><br><span class="line">        console.log(screenName);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" data-id="cjbc9suzl002ayoqb4p7phbzl" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-background-attachment是个什么东东？" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/02/18/background-attachment是个什么东东？/">background-attachment是个什么东东？</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/02/18/background-attachment是个什么东东？/">
+            <time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/background-attachment/">background-attachment</a>, <a class="tag-link" href="/tags/css/">css</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>今天看到一个挺好看的页面效果，觉得挺神奇，不觉查看起代码，发现最终实现效果的关键代码是background-attachment。</p>
+<pre><code>background-attachment：可以取值 fixed 、 local 、 scroll
+默认值：scroll
+</code></pre><h4 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h4><ol>
+<li>fixed：<br>背景图像相对于窗体固定。依赖于其视口(viewport)，当页面滚动时，背景效果不会随之滚动，而是保留背景本来的位置。当滚动式，背景随着当前元素(Div)的滚动而相对应显示。可以想象所有的背景堆积在一起，当前元素滚到时才显示出来。</li>
+<li>scroll：<br>这是我们平时看到的效果，背景图像依赖于元素，也就是说当元素内容滚动时背景图像不会跟着滚动，因为背景图像总是要跟着元素本身。但会随元素的祖先元素或窗体一起滚动。</li>
+<li>local：<br>背景图像相对于元素内容固定，也就是说当元素随元素滚动时背景图像也会跟着滚动，因为背景图像总是要跟着内容。（CSS3）</li>
+</ol>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>当background-attachment取值fixed时的效果<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">		body &#123;</span></span><br><span class="line"><span class="undefined">			margin: 0px;</span></span><br><span class="line"><span class="undefined">			padding: 0px;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		body div&#123;			</span></span><br><span class="line"><span class="undefined">			height: 800px;</span></span><br><span class="line"><span class="undefined">			width: 100%;</span></span><br><span class="line"><span class="undefined">			background-repeat: no-repeat;</span></span><br><span class="line"><span class="undefined">			background-attachment: fixed;</span></span><br><span class="line"><span class="undefined">			background-size: cover;</span></span><br><span class="line"><span class="undefined">			background-position: center;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		.test &#123;</span></span><br><span class="line"><span class="undefined">			background-image: url(./1.jpg);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		.test1 &#123; </span></span><br><span class="line"><span class="undefined">			background-image: url(./2.jpg); </span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		.test2 &#123; </span></span><br><span class="line"><span class="undefined">			background-image: url(./3.jpg); </span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test1"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"test2"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p>很酷原理却很简单<br><img src="/pic/attachment.gif" alt=""></p>
+<h4 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h4><ol>
+<li>IE8及更早浏览器不支持CSS3新增local。</li>
+<li>Firefox4.0-8.0不支持CSS3新增local。</li>
+<li>IE6以下的版本不支持Fixed</li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2016/02/18/background-attachment是个什么东东？/" data-id="cjbc9suxm000myoqbc6s3vqke" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-6个让内容垂直居中的方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/01/23/6个让内容垂直居中的方法/">6个让内容垂直居中的方法</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/01/23/6个让内容垂直居中的方法/">
+            <time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CSS/">CSS</a>, <a class="tag-link" href="/tags/mongoose/">mongoose</a>, <a class="tag-link" href="/tags/垂直/">垂直</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>所有的例子Html如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;parent&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;child&quot;&gt;内容垂直居中&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>使用绝对定位<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   * &#123;</span><br><span class="line">    padding: 10px 20px;</span><br><span class="line">&#125;</span><br><span class="line">.parent &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    height: 200px;</span><br><span class="line">    width: 300px;</span><br><span class="line">    background: #ccc;</span><br><span class="line">    margin-left: auto;</span><br><span class="line">    margin-right: auto;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    color: #fff;</span><br><span class="line">    top: 100px;</span><br><span class="line">    line-height: 100px;</span><br><span class="line">    margin-top: -50px;</span><br><span class="line">    background: #333;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>通过调节文字内容的行距和子层的margin-top达到竖直居中的目的</p>
+<ol>
+<li>使用translateY转换轴<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   * &#123;</span><br><span class="line">    padding: 10px 20px;</span><br><span class="line">&#125;</span><br><span class="line">.parent &#123;</span><br><span class="line">	height: 100px;</span><br><span class="line">	background: #ccc;</span><br><span class="line">    color: #fff;</span><br><span class="line">    width: 300px;</span><br><span class="line">    margin-left: auto;</span><br><span class="line">    margin-right: auto;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">    text-align: center;</span><br><span class="line">	position: relative;</span><br><span class="line">	top: 50%;</span><br><span class="line">	-webkit-transform: translateY(-50%);</span><br><span class="line">	-o-transform: translateY(-50%);</span><br><span class="line">	transform: translateY(-50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种写法对IE版本低于8是不会起作用的。</p>
+<ol>
+<li>通过padding<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    padding: 10px 20px;</span><br><span class="line">&#125;</span><br><span class="line">.parent &#123; </span><br><span class="line">	background: #ccc;</span><br><span class="line">    color: #fff;</span><br><span class="line">    width: 300px;</span><br><span class="line">    margin-left: auto;</span><br><span class="line">    margin-right: auto;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">	padding: 10% 50px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>此写法适用于父，子窗口不固定高度</p>
+<ol>
+<li>直接使用line-height<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   * &#123;</span><br><span class="line">    padding: 10px 20px;</span><br><span class="line">&#125;</span><br><span class="line">.parent &#123; </span><br><span class="line">	background: #ccc;</span><br><span class="line">    color: #fff;</span><br><span class="line">    width: 300px;</span><br><span class="line">    width: 300px;</span><br><span class="line">    margin-left: auto;</span><br><span class="line">    margin-right: auto;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">	line-height: 300px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>很明显这种方法一旦出现2行文字就会有问题</p>
+<ol>
+<li>使用CSS Table<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   * &#123;</span><br><span class="line">    padding: 10px 20px;</span><br><span class="line">&#125;</span><br><span class="line">.parent &#123; </span><br><span class="line">	display: table;</span><br><span class="line">	background: #ccc;</span><br><span class="line">	height: 100px;</span><br><span class="line">    color: #fff;</span><br><span class="line">    margin-left: auto;</span><br><span class="line">    margin-right: auto;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">	display: table-cell;</span><br><span class="line">	vertical-align: middle;</span><br><span class="line">    padding: 0 30px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>前方高能！！<br>前方高能！！<br>前方高能！！<br>这是内容垂直居中最好用的方法。</p>
+<ol>
+<li>使用flexbox<pre><code>* {
+    padding: 10px 20px;
+}
+.parent { 
+    display: flex;
+    align-items: center;
+    height: 10em;
+    background: #ccc;
+    width: 300px;
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+}
+</code></pre>在父窗口定义flex，并用align-items调整伸缩项目在侧轴的对齐方式。但是flex在各浏览器的兼容性较差。</li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2016/01/23/6个让内容垂直居中的方法/" data-id="cjbc9suww0006yoqb3xf9birs" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-盒子模型box-sizing" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2015/11/22/盒子模型box-sizing/">盒子模型box-sizing</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/11/22/盒子模型box-sizing/">
+            <time datetime="2015-11-22T06:01:32.000Z" itemprop="datePublished">2015-11-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/border-box/">border-box</a>, <a class="tag-link" href="/tags/content-box/">content-box</a>, <a class="tag-link" href="/tags/盒子模型/">盒子模型</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>css盒子模型将DIV的构成比喻成一个盒子。盒子由里装的东西,盒子厚度,盒子内置厚度，和外置距离分别对应DIV元素的内容<code>content</code>，内边距<code>padding</code>，边框<code>border</code>，外边距<code>margin</code>.<br>我们在css中写的width，height具体代表着是content的width和height还是代表着整个Element的width或者height呢？这个不确定的话，整个网页的布局无从把握。<br><img src="/pic/hezi/box-sizing.jpg" alt="此处输入图片的描述"></p>
+<h3 id="box-sizing属性"><a href="#box-sizing属性" class="headerlink" title="box-sizing属性"></a>box-sizing属性</h3><p>box-sizing属性是决定盒子模型的属性</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">box-sizing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>取值</td>
+<td style="text-align:center">content-box / border-box</td>
+</tr>
+<tr>
+<td>初始</td>
+<td style="text-align:center">content-box</td>
+</tr>
+<tr>
+<td>应用</td>
+<td style="text-align:center">所有含有width和height的元素</td>
+</tr>
+<tr>
+<td>继承</td>
+<td style="text-align:center">不可继承</td>
+</tr>
+<tr>
+<td>动作</td>
+<td style="text-align:center">不支持</td>
+</tr>
+</tbody>
+</table>
+<h3 id="content-box"><a href="#content-box" class="headerlink" title="content-box"></a>content-box</h3><p><code>content-box</code>是在CSS2.1中定义的，一直在用。当<code>box-sizing:content-box</code>时，这是定义的width,height是指内容的宽度和高度，而padding和border将在这个width/height以外的区域绘制即(<code>Element_height = height + padding + border</code>).</p>
+<blockquote>
+<p>实例  </p>
+</blockquote>
+<p>见代码中的box1，当box-sizing没指定时默认content-box. Element_width(250)= width(230px)+border*2(10px)+padding-right(10px)<br><img src="/pic/hezi/content.jpg" alt="content-box"></p>
+<h3 id="border-box"><a href="#border-box" class="headerlink" title="border-box"></a>border-box</h3><p>这时定义的width，height是整个盒子Element的宽高。padding，border将在这个width，height决定的区域内绘制。此时的<code>Element_height = height</code><br>而当前Element的内容的宽高<code>content_height=height+padding+border</code></p>
+<blockquote>
+<p>实例  </p>
+</blockquote>
+<p>Element_width = width<br><img src="/pic/hezi/border.jpg" alt="border-box"></p>
+<h3 id="不同浏览器兼容写法"><a href="#不同浏览器兼容写法" class="headerlink" title="不同浏览器兼容写法"></a>不同浏览器兼容写法</h3><table>
+<thead>
+<tr>
+<th>Browser</th>
+<th style="text-align:center">Special-prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Webkit(Chrome/Safari)</td>
+<td style="text-align:center">-webkit-box-sizing</td>
+</tr>
+<tr>
+<td>Gecko(Firefox)</td>
+<td style="text-align:center">-moz-box-sizing</td>
+</tr>
+<tr>
+<td>Presto(Opera)</td>
+<td style="text-align:center">-o-box-sizing</td>
+</tr>
+<tr>
+<td>Trident(IE)IE8:</td>
+<td style="text-align:center">-ms-box-sizing/IE9:box-sizing</td>
+</tr>
+</tbody>
+</table>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta  charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;style&gt; </span><br><span class="line">    .box1&#123;</span><br><span class="line">        width:230px;</span><br><span class="line">        height:200px;</span><br><span class="line">        background-color:#eee;</span><br><span class="line">        border:5px solid #444;</span><br><span class="line">        padding-right:10px;</span><br><span class="line">        float:left;</span><br><span class="line">    &#125;</span><br><span class="line">    .box2&#123;</span><br><span class="line">        width:230px;</span><br><span class="line">        height:200px;</span><br><span class="line">        background-color:#eee;</span><br><span class="line">        border:5px solid #444;</span><br><span class="line">        box-sizing:border-box;</span><br><span class="line">        padding-right:10px;</span><br><span class="line">        float:right;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;box1&quot;&gt;content-box&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;box2&quot;&gt;border-box&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2015/11/22/盒子模型box-sizing/" data-id="cjbc9sv3c0050yoqbuhhnoial" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-CSS预处理语言-less" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2015/11/02/CSS预处理语言-less/">CSS预处理语言-less</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/11/02/CSS预处理语言-less/">
+            <time datetime="2015-11-02T11:22:32.000Z" itemprop="datePublished">2015-11-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/less/">less</a>, <a class="tag-link" href="/tags/前端/">前端</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>我们知道css里面的一切都是常量，less在css的基础上引入变量，函数等。这样相当于一个动态css。编写好的Less可以通过编译得到css文件，或者浏览器端直接引用<code>x.less</code>。less的特性使得其成为便于理解和维护的CSS。平时修改css只能通过编辑器的查找，现在代码结构一目了然，和查找html节点一样查找即可。</p>
+<h2 id="语言特性"><a href="#语言特性" class="headerlink" title="语言特性"></a>语言特性</h2><h3 id="Less变量"><a href="#Less变量" class="headerlink" title="Less变量"></a>Less变量</h3><p>可以在less文件中定义变量，给变量赋值并使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@wrap-width:30px;</span><br><span class="line">.divwrap&#123; </span><br><span class="line">    width: @wrap-width;</span><br><span class="line">    background-color: #eee;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译成css后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.divwrap &#123;</span><br><span class="line">  width: 30px;</span><br><span class="line">  background-color: #eee;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h3><p>我觉得嵌套可以大大的减少代码量，增强代码结构，与Html嵌套相对应.<br>例如这是Html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;divwrap&quot;&gt;</span><br><span class="line">	&lt;div class=&quot;childdiv1&quot;&gt;ccc&lt;/div&gt;</span><br><span class="line">	&lt;div class=&quot;childdiv2&quot;&gt;ccc&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这是less<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@wrap-width:30px;</span><br><span class="line">.divwrap&#123; </span><br><span class="line">    width: @wrap-width;</span><br><span class="line">    background-color: #eee;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    .childdiv1&#123;</span><br><span class="line">        background-color: #222;</span><br><span class="line">    &#125;</span><br><span class="line">    .childdiv2&#123;</span><br><span class="line">        background-color: #777;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>生成的css,很明显，less在结构上更清晰<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.divwrap &#123;</span><br><span class="line">  width: 30px;</span><br><span class="line">  background-color: #eee;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.divwrap .childdiv1 &#123;</span><br><span class="line">  background-color: #222;</span><br><span class="line">&#125;</span><br><span class="line">.divwrap .childdiv2 &#123;</span><br><span class="line">  background-color: #777;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><p><code>@child1-width</code>和<code>@wrap-width</code>，前者等于后者见5px，单位意义相同的都可以做运算。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@wrap-width:30px;</span><br><span class="line">@child1-width:@wrap-width - 5px;</span><br><span class="line">.divwrap&#123; </span><br><span class="line">    width: @wrap-width;</span><br><span class="line">    background-color: #eee;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    .childdiv1&#123;</span><br><span class="line">        width: @child1-width;</span><br><span class="line">        background-color: #222;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.divwrap &#123;</span><br><span class="line">  width: 30px;</span><br><span class="line">  background-color: #eee;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.divwrap .childdiv1 &#123;</span><br><span class="line">  width: 25px;</span><br><span class="line">  background-color: #222;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>less提供一些基础的内置函数<a href="http://less.bootcss.com/functions/#functions-overview" target="_blank" rel="noopener">查看</a>，也可以自定义函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@wrap-width:30px;</span><br><span class="line">.getchildwidth(@temp-width:30px)&#123;</span><br><span class="line">    width:@temp-width - 10px;</span><br><span class="line">&#125;</span><br><span class="line">.divwrap&#123; </span><br><span class="line">    width: @wrap-width;</span><br><span class="line">    background-color: #eee;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    .childdiv1&#123;</span><br><span class="line">        .getchildwidth();</span><br><span class="line">        background-color: #222;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面定义了一个<code>函数</code>getchildwidth`,下面是我们所期望的css。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.divwrap &#123;</span><br><span class="line">  width: 30px;</span><br><span class="line">  background-color: #eee;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.divwrap .childdiv1 &#123;</span><br><span class="line">  width: 20px;</span><br><span class="line">  background-color: #222;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="父选择器-amp"><a href="#父选择器-amp" class="headerlink" title="父选择器&amp;"></a>父选择器<code>&amp;</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.divwrap&#123; </span><br><span class="line">    width: 30px;</span><br><span class="line">    height: 20px;</span><br><span class="line">    background-color: #eee;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">        background-color: #ccc;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码中的<code>&amp;</code>代表着<code>divwrap</code>自己<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.divwrap &#123;</span><br><span class="line">  width: 30px;</span><br><span class="line">  height: 20px;</span><br><span class="line">  background-color: #eee;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.divwrap:hover &#123;</span><br><span class="line">  background-color: #ccc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>当然还包括很多其它的东西，例如循环<code>loop</code>,合并，scope等</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2015/11/02/CSS预处理语言-less/" data-id="cjbc9sux6000ayoqbyxktna4i" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-介绍几个常用的sublime插件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2015/09/21/介绍几个常用的sublime插件/">介绍几个常用的sublime插件</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/09/21/介绍几个常用的sublime插件/">
+            <time datetime="2015-09-21T14:42:32.000Z" itemprop="datePublished">2015-09-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/工具/">工具</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/HTML/">HTML</a>, <a class="tag-link" href="/tags/sublime/">sublime</a>, <a class="tag-link" href="/tags/插件/">插件</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>##如何安装插件<br><code>ctrl+shift+p</code> 输入<code>package</code> ,根据智能提示 选择<code>install package</code>，然后输入你想添加的插件名．如果还不知道怎么安装的话，可以参看<a href="http://blog.38sr.com/2015/06/24/sublime%E7%BC%96%E8%BE%91%E5%99%A8%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">sublime编辑器使用笔记</a></p>
+<p>##Emmet<br>Emmet的前身是Zencoding，用它可以加快编写Html网页的效率，原理使用css的选择器<code>.tagClass</code>，<code>#tagId</code> 等，前不久同事给我介绍一个可视化代码编写工具hbuilder，下载一看，这个工具竟然也支持这种写法，看来这种写法已经很流行了。<br>用户在输入一段类似于css的标签后，按下<code>tab</code>即可完成一段html的编写．更多<a href="http://docs.emmet.io/" target="_blank" rel="noopener">Emmet用法</a><br>用法实例1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ul.ulclass&gt;li.cc*3</span><br></pre></td></tr></table></figure></p>
+<p>形成如下的代码，是不是很神奇？Ｏ（∩＿∩）Ｏ哈哈～<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;ulclass&quot;&gt;</span><br><span class="line">	&lt;li class=&quot;cc&quot;&gt;&lt;/li&gt;</span><br><span class="line">	&lt;li class=&quot;cc&quot;&gt;&lt;/li&gt;</span><br><span class="line">	&lt;li class=&quot;cc&quot;&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用法实例2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ul.ulclass&gt;li.cc*3^+div.nextdiv</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;ulclass&quot;&gt;</span><br><span class="line">	&lt;li class=&quot;cc&quot;&gt;&lt;/li&gt;</span><br><span class="line">	&lt;li class=&quot;cc&quot;&gt;&lt;/li&gt;</span><br><span class="line">	&lt;li class=&quot;cc&quot;&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;div class=&quot;nextdiv&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/pic/sublime/GIF.gif" alt=""></p>
+<p>##Javascript Beautify<br>看插件名就知道是帮助美化js代码，使用方法首先选中需要格式化的代码</p>
+<ul>
+<li>然后<code>Ctrl+Shift+p</code>，然后输入<code>Javascript Beautify</code></li>
+<li>后者直接快捷键<code>Ctrl+Alt+F</code></li>
+</ul>
+<p><img src="/pic/sublime/GIF3.gif" alt=""></p>
+<p>##Html Beautify<br>平时喜欢用ejs作业，写出来的代码，sublime自带的html代码识别根本没法辨别，时间久自己也看不懂。使用这个插件，代码对齐的很清楚。</p>
+<ul>
+<li>然后<code>Ctrl+Shift+p</code>，然后输入<code>HTMLBeautify</code></li>
+<li>后者直接快捷键<code>Ctrl+Alt+Shift+F</code></li>
+</ul>
+<p><img src="/pic/sublime/GIF2.gif" alt=""></p>
+<h2 id="Markdown-Preview"><a href="#Markdown-Preview" class="headerlink" title="Markdown Preview"></a>Markdown Preview</h2><p>当你使用<code>Sublime Text</code>的时候这个插件能帮助你把<code>markdown</code>标记语言转化成html网页.安装插件后，在markdown页面下，输入<code>markdown preview</code>选择preview in browser或者save to html．</p>
+<p>##Css Format<br>看名字也知道是格式化css代码的．安装输入<code>Css Format</code>，安装完成后选中代码，然后<code>Edit-&gt;Css format-&gt;*</code>可以压缩，格式化等．</p>
+<p>##一个平台<br>借着这股东风，推荐一个之前看到的平台，这个网站包含nodejs，php，mongodb，redis，memcached等各种终端，提供在线编写包括bootstrap，jquery，java，javascript，ruby等各种框架的界面工具．基本上你兴趣来潮想使用某个语言或者框架都可以找得到．地址奉上<br><a href="http://www.tutorialspoint.com/codingground.htm" target="_blank" rel="noopener">http://www.tutorialspoint.com/codingground.htm</a></p>
+<blockquote>
+<p>如果以后有好的插件将陆续补上</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2015/09/21/介绍几个常用的sublime插件/" data-id="cjbc9sv09002syoqbvy5q8xez" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-sublime编辑器使用笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2015/06/24/sublime编辑器使用笔记/">sublime编辑器使用笔记</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/06/24/sublime编辑器使用笔记/">
+            <time datetime="2015-06-24T03:29:32.000Z" itemprop="datePublished">2015-06-24</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/工具/">工具</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/sublime/">sublime</a>, <a class="tag-link" href="/tags/笔记/">笔记</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>其实用sublime已经有一段时间了，一开始接触ubuntu时用的都是vim，后来很长时间都没法习惯vim的用法，就开始用sublime．Sublime是一个可以长期免费使用的收费软件。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先在<a href="http://www.sublimetext.com/3" target="_blank" rel="noopener">官网Sublime3</a>下载下来,输入下面的命令<br><code>dpkg -i sublime-text_build-3083_i386.deb</code><br>即可安装，安装完成后在应用程序菜单中可以看到Sublime 3的图标。<br>但是直接打开就会发现无法输入中文，这里安照网上常用的方法解决了．</p>
+<h2 id="解决无法中文输入"><a href="#解决无法中文输入" class="headerlink" title="解决无法中文输入"></a>解决无法中文输入</h2><h3 id="安装依赖库和输入法"><a href="#安装依赖库和输入法" class="headerlink" title="安装依赖库和输入法"></a>安装依赖库和输入法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libgtk2.0-dev</span><br><span class="line">sudo apt-get install pkg-config</span><br><span class="line">sudo apt-get install fcitx</span><br></pre></td></tr></table></figure>
+<h3 id="编译共享库"><a href="#编译共享库" class="headerlink" title="编译共享库"></a>编译共享库</h3><p>在<code>～</code>目录下新建一个<code>sublime_imfix.c</code>的文件，内容如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="tag">&lt;<span class="name">gtk</span>/<span class="attr">gtkimcontext.h</span>&gt;</span></span><br><span class="line">void gtk_im_context_set_client_window (GtkIMContext *context,GdkWindow *window)</span><br><span class="line">&#123;</span><br><span class="line"> GtkIMContextClass *klass;</span><br><span class="line"> g_return_if_fail (GTK_IS_IM_CONTEXT (context));</span><br><span class="line"> klass = GTK_IM_CONTEXT_GET_CLASS (context);</span><br><span class="line"> if (klass-&gt;set_client_window)</span><br><span class="line">   klass-&gt;set_client_window (context, window);</span><br><span class="line"> g_object_set_data(G_OBJECT(context),"window",window);</span><br><span class="line"> if(!GDK_IS_WINDOW (window))</span><br><span class="line">   return;</span><br><span class="line"> int width = gdk_window_get_width(window);</span><br><span class="line"> int height = gdk_window_get_height(window);</span><br><span class="line"> if(width != 0 &amp;&amp; height !=0)</span><br><span class="line">   gtk_im_context_focus_in(context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags gtk+-2.0` -PIC</span><br></pre></td></tr></table></figure></p>
+<p>执行完后，当前目录下出现<code>libsublime-imfix.so</code>文件<br>然后将<code>libsublime-imfix.so</code>复制到Sublime安装目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv libsublime-imfix.so /opt/sublime_text/</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改启动命令"><a href="#修改启动命令" class="headerlink" title="修改启动命令"></a>修改启动命令</h3><ul>
+<li>修改文件/usr/bin/subl命令的内容<br><code>vim /usr/bin/subl</code><br>将<br><code>#!/bin/sh
+exec /opt/sublime_text/sublime_text &quot;$@&quot;</code><br>修改为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">LD_PRELOAD=/opt/sublime_text/libsublime-imfix.so exec /opt/sublime_text/sublime_text &quot;$@&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>现在在终端中输入<code>subl</code>即可支持中文输入</p>
+<ul>
+<li>当然为了点击图标打开的Sublime能支持中文输入还需修改<code>sublime_text.desktop</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/applications/sublime_text.desktop</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>把三个条目下的Exec部分修改为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Exec=bash -c &quot;LD_PRELOAD=/opt/sublime_text/libsublime-imfix.so exec /opt/sublime_text/sublime_text %F&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[Desktop Action Window]</span><br><span class="line">Exec=bash -c &quot;LD_PRELOAD=/opt/sublime_text/libsublime-imfix.so exec /opt/sublime_text/sublime_text %F&quot;</span><br><span class="line"></span><br><span class="line">[Desktop Action Document]</span><br><span class="line">Exec=bash -c &quot;LD_PRELOAD=/opt/sublime_text/libsublime-imfix.so exec /opt/sublime_text/sublime_text --command</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><ul>
+<li>安装插件除开把插件解压到Packages目录(菜单-&gt;preferences-&gt;packages)</li>
+<li>还可以通过自带的package control 安装<br>需要打开Sublime后输入Ctrl+｀调出console，然后输入如下执行．<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request,os; </span><br><span class="line">pf = &apos;Package Control.sublime-package&apos;; </span><br><span class="line">ipp = sublime.installed_packages_path(); </span><br><span class="line">urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); </span><br><span class="line">open(os.path.join(ipp, pf), &apos;wb&apos;).write(urllib.request.urlopen( &apos;http://sublime.wbond.net/&apos; + pf.replace(&apos; &apos;,&apos;%20&apos;)).read())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此时在输入<code>ctrl+shift+p</code>调出面板，输入<code>Package Control:install Package</code>,按下enter就可以查询浏览插件,输入插件名点中就可以安装</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2015/06/24/sublime编辑器使用笔记/" data-id="cjbc9suzt002fyoqb1k26ivq8" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-38SR安卓app开发" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2015/03/31/38SR安卓app开发/">38SR安卓app开发</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/03/31/38SR安卓app开发/">
+            <time datetime="2015-03-31T10:56:48.000Z" itemprop="datePublished">2015-03-31</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/畅游互联网/">畅游互联网</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/app/">app</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>自己针对www.38sr.com做的android软件，后端开发采用之前的web后端逻辑，直接写成返回json格式，小菜鸟按照网上的开源app框架，做了一个38SR的app.</p>
+<ul>
+<li>登录页面<br><img src="/pic/androidapp/1.png" width="300px"> </li>
+<li>注册页面<br><img src="/pic/androidapp/2.png" width="300px"> </li>
+<li>版块页面<br><img src="/pic/androidapp/3.png" width="300px"> </li>
+<li>心情页面<br><img src="/pic/androidapp/4.png" width="300px"> </li>
+<li>发表心情页面<br><img src="/pic/androidapp/5.png" width="300px"> </li>
+<li>心情详细页面<br><img src="/pic/androidapp/6.png" width="300px"> </li>
+<li>评论界面<br><img src="/pic/androidapp/7.png" width="300px"> </li>
+<li>个人主页<br><img src="/pic/androidapp/8.png" width="300px"> </li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2015/03/31/38SR安卓app开发/" data-id="cjbc9suws0005yoqbxj6qvepz" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Siguiente  &raquo;</a>
+    </nav>
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

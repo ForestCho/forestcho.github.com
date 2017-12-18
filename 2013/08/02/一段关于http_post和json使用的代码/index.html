@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>一段关于http_post和json使用的代码  | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="实习没几天，了解了不少东西有java,json也有数据库方面的。json简单说就是javascript中的对象和数组，所以这两种结构就是对象和数组2种结构，通过这两种结构可以表示各种复杂的结构1、对象：对象在js中表示为“{}”扩起来的内容，数据结构为 {key：value,key：value,…}的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取">
+<meta name="keywords" content="json,php,java,BOM,对象,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一段关于http_post和json使用的代码 ">
+<meta property="og:url" content="http://38sr.com/2013/08/02/一段关于http_post和json使用的代码/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="实习没几天，了解了不少东西有java,json也有数据库方面的。json简单说就是javascript中的对象和数组，所以这两种结构就是对象和数组2种结构，通过这两种结构可以表示各种复杂的结构1、对象：对象在js中表示为“{}”扩起来的内容，数据结构为 {key：value,key：value,…}的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取">
+<meta property="og:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213839-267x300.jpg">
+<meta property="og:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213122-300x33.jpg">
+<meta property="og:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213718-300x65.jpg">
+<meta property="og:updated_time" content="2014-04-13T05:00:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一段关于http_post和json使用的代码 ">
+<meta name="twitter:description" content="实习没几天，了解了不少东西有java,json也有数据库方面的。json简单说就是javascript中的对象和数组，所以这两种结构就是对象和数组2种结构，通过这两种结构可以表示各种复杂的结构1、对象：对象在js中表示为“{}”扩起来的内容，数据结构为 {key：value,key：value,…}的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取">
+<meta name="twitter:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213839-267x300.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-一段关于http_post和json使用的代码" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            一段关于http_post和json使用的代码 
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2013/08/02/一段关于http_post和json使用的代码/">
+            <time datetime="2013-08-02T13:38:23.000Z" itemprop="datePublished">2013-08-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/畅游互联网/">畅游互联网</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/BOM/">BOM</a>, <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/json/">json</a>, <a class="tag-link" href="/tags/php/">php</a>, <a class="tag-link" href="/tags/对象/">对象</a>, <a class="tag-link" href="/tags/数据结构/">数据结构</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>实习没几天，了解了不少东西有java,json也有数据库方面的。json简单说就是javascript中的对象和数组，所以这两种结构就是对象和数组2种结构，通过这两种结构可以表示各种复杂的结构<br>1、对象：对象在js中表示为“{}”扩起来的内容，数据结构为 {key：value,key：value,…}的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象.key 获取属性值，这个属性值的类型可以是 数字、字符串、数组、对象几种。<br>2、数组：数组在js中是中括号“[]”扩起来的内容，数据结构为 [“java”,”javascript”,”vb”,…]，取值方式和所有语言中一样，使用索引获取，字段值的类型可以是 数字、字符串、数组、对象几种。<br>经过对象、数组2种结构就可以组合成复杂的数据结构了。</p>
+<p>{“name”:”中国”,”province”:[{“name”:”黑龙江”,”cities”:{“city”:[“哈尔滨”,”大庆”]}},{“name”:”广东”,”cities”:{“city”:[“广州”,”深圳”,”珠海”]}},{“name”:”台湾”,”cities”:{“city”:[“台北”,”高雄”]}},{“name”:”新疆”,”cities”:{“city”:[“乌鲁木齐”]}}]}<br>这是从网络摘取的一段JSON，将这段代码复制到<a href="http://app.baidu.com/app/enter?appid=233002这个网址内解析下可以清楚的看到树形格式，方便理解。" target="_blank" rel="noopener">http://app.baidu.com/app/enter?appid=233002这个网址内解析下可以清楚的看到树形格式，方便理解。</a></p>
+<p>[caption id=”attachment_122” align=”aligncenter” width=”267”]<a href="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213839.jpg" target="_blank" rel="noopener"><img src="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213839-267x300.jpg" alt="树形图"></a> 树形图[/caption]</p>
+<p>下面我就贴下改的一小段接收json 的java代码：<br>=============发送请求和接收响应返回值代码==========================</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public static String doPost(String url, Map&lt;String, String&gt; params)</span><br><span class="line">throws IllegalStateException, IOException &#123;</span><br><span class="line">String strResult = &quot;&quot;;</span><br><span class="line">HttpClient httpClient = new DefaultHttpClient();</span><br><span class="line">HttpPost post = new HttpPost(url);</span><br><span class="line">List postData = new ArrayList();</span><br><span class="line">for (Map.Entry&lt;String, String&gt; entry : params.entrySet()) &#123;</span><br><span class="line">postData.add(new BasicNameValuePair(entry.getKey(), entry</span><br><span class="line">.getValue()));</span><br><span class="line">System.out.println(entry.getKey()+&quot;:&quot;+entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line">UrlEncodedFormEntity entity = new UrlEncodedFormEntity(postData,HTTP.UTF_8);//过时了?</span><br><span class="line">post.setEntity(entity);</span><br><span class="line">HttpResponse response = httpClient.execute(post);</span><br><span class="line">HttpEntity entity2=response.getEntity();</span><br><span class="line">// 若状态码为200 ok</span><br><span class="line">if (response.getStatusLine().getStatusCode() == 200) &#123;</span><br><span class="line">// 取出回应字串</span><br><span class="line">strResult = EntityUtils.toString(entity2);</span><br><span class="line">&#125;</span><br><span class="line">return strResult;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>==========================主函数如下=============================</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static void main(String[] args) throws IllegalStateException,</span><br><span class="line"> IOException &#123;</span><br><span class="line"> HashMap&lt;String, String&gt; user = new HashMap&lt;String, String&gt;();</span><br><span class="line"> user.put(&quot;username&quot;, &quot;admin&quot;);</span><br><span class="line"> user.put(&quot;password&quot;, &quot;123&quot;);</span><br><span class="line"> //网址为测试网址</span><br><span class="line"> String post = doPost(&quot;http://127.0.0.1/httppost/login_mobile.php&quot;, user);</span><br><span class="line"> System.out.println(&quot;Post:&quot; + post);</span><br><span class="line"> JSONObject jsonObject=JSONObject.fromObject(post);</span><br><span class="line"> String success=jsonObject.getString(&quot;success&quot;);</span><br><span class="line"> if(success.equals(&quot;1&quot;))&#123;</span><br><span class="line"> String name=jsonObject.getString(&quot;username&quot;);</span><br><span class="line"> String pwd=jsonObject.getString(&quot;password&quot;);</span><br><span class="line"> System.out.println(name);</span><br><span class="line"> System.out.println(pwd);</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>===================服务器响应php代码如下========================</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!--?php define(&apos;INCLUDE_CHECK&apos;,1);</span><br><span class="line"> require_once(&apos;connect.php&apos;);</span><br><span class="line"> $query=mysql_query(&quot;select * from user&quot;);</span><br><span class="line"> $name=$_POST[username]; $pwd=$_POST[password];</span><br><span class="line"> $sql = &quot;select * from user where username=&apos;&quot;.$name.&quot;&apos;&quot;;</span><br><span class="line"> $rs=mysql_query($sql);</span><br><span class="line"> $arr=mysql_fetch_array($rs);</span><br><span class="line"> if($arr&amp;amp;&amp;amp;$arr[&apos;userpwd&apos;]==$pwd) &#123; $array = array( &apos;success&apos;=&gt;&apos;1&apos;,</span><br><span class="line"> &apos;username&apos;=&gt;&apos;杨铸&apos;,</span><br><span class="line"> &apos;password&apos;=&gt;&apos;123456&apos;,</span><br><span class="line"> &apos;user_id&apos;=&gt;&apos;33&apos;,);</span><br><span class="line"> &#125;</span><br><span class="line"> else</span><br><span class="line"> &#123;</span><br><span class="line"> $array = array(</span><br><span class="line"> &apos;success&apos;=&gt;&apos;0&apos;,</span><br><span class="line"> &apos;username&apos;=&gt;&apos;0&apos;,</span><br><span class="line"> &apos;password&apos;=&gt;&apos;0&apos;,</span><br><span class="line"> &apos;user_id&apos;=&gt;&apos;0&apos;,);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">echo json_encode($array);</span><br><span class="line"> mysql_close();</span><br><span class="line"> ?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>=================小插曲出现了========================</p>
+<p>[caption id=”attachment_120” align=”aligncenter” width=”300”]<a href="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213122.jpg" target="_blank" rel="noopener"><img src="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213122-300x33.jpg" alt="出错？"></a> 出错？[/caption]</p>
+<p>调试的时候出现错误了，意思大概是说json格式不对，其实这个问题如果没经历过确实很难想出为什么，之前我改网站的时候就出现过代码保存用别的格式 例如 BOM格式的会是网页最上面无故多出一行，所以这里很快找出错误。用EditPlus把代码另存为UTF-8即可。</p>
+<p>[caption id=”attachment_121” align=”aligncenter” width=”300”]<a href="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213718.jpg" target="_blank" rel="noopener"><img src="http://www.yidongzhifu.net/wp-content/uploads/2013/08/QQ截图20130802213718-300x65.jpg" alt="解析正确"></a> 解析正确[/caption]</p>
+<p>可以看出成功的输出解析后的正确结果。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2013/08/02/一段关于http_post和json使用的代码/" data-id="cjbc9sv06002qyoqblegd6ifb" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2013/08/03/索引的作用？怎么创建索引/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    索引的作用？怎么创建索引
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2013/08/02/教你怎么在mysql中导入大量数据/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">教你怎么在MYSQL中导入大量数据</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

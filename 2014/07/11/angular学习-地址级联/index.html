@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>angular学习-地址级联 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="接触angular没几天，发现angular确实很强大，单就数据绑定就让html变得相当强大，开始接触这个词是在一个码农周刊的电子书上看到的，书上将他和Backbone,Emberjs等一系列高端的东西比较一番。AngularJS是由Google创建的一种JS前端框架，使用它可以扩展应用程序中的HTML词汇，从而在web应用程序中使用HTML声明动态内容。AngularJS可以让你扩展HTML的语">
+<meta name="keywords" content="框架,angularjs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular学习-地址级联">
+<meta property="og:url" content="http://38sr.com/2014/07/11/angular学习-地址级联/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="接触angular没几天，发现angular确实很强大，单就数据绑定就让html变得相当强大，开始接触这个词是在一个码农周刊的电子书上看到的，书上将他和Backbone,Emberjs等一系列高端的东西比较一番。AngularJS是由Google创建的一种JS前端框架，使用它可以扩展应用程序中的HTML词汇，从而在web应用程序中使用HTML声明动态内容。AngularJS可以让你扩展HTML的语">
+<meta property="og:image" content="http://38sr.com/pic/angular/1.gif">
+<meta property="og:image" content="http://38sr.com/pic/angular/2.gif">
+<meta property="og:updated_time" content="2014-07-11T16:16:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular学习-地址级联">
+<meta name="twitter:description" content="接触angular没几天，发现angular确实很强大，单就数据绑定就让html变得相当强大，开始接触这个词是在一个码农周刊的电子书上看到的，书上将他和Backbone,Emberjs等一系列高端的东西比较一番。AngularJS是由Google创建的一种JS前端框架，使用它可以扩展应用程序中的HTML词汇，从而在web应用程序中使用HTML声明动态内容。AngularJS可以让你扩展HTML的语">
+<meta name="twitter:image" content="http://38sr.com/pic/angular/1.gif">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-angular学习-地址级联" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            angular学习-地址级联
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/07/11/angular学习-地址级联/">
+            <time datetime="2014-07-11T13:12:32.000Z" itemprop="datePublished">2014-07-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/代码/">代码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/angularjs/">angularjs</a>, <a class="tag-link" href="/tags/框架/">框架</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>接触angular没几天，发现angular确实很强大，单就数据绑定就让html变得相当强大，开始接触这个词是在一个码农周刊的电子书上看到的，书上将他和Backbone,Emberjs等一系列高端的东西比较一番。<br>AngularJS是由Google创建的一种JS前端框架，使用它可以扩展应用程序中的HTML词汇，从而在web应用程序中使用HTML声明动态内容。<br>AngularJS可以让你扩展HTML的语法，以便清晰、简洁地表示应用程序中的组件，并允许将标准的HTML作为你的模板语言，AngularJS可以通过双向数据绑定。<br>奇怪的是<a href="http://docs.angularjs.org" target="_blank" rel="noopener">angular官网</a>完全进不去，不知道是什么原因，想下载都没法。后来发现一个很nice的网站<a href="http://cdnjs.com/" target="_blank" rel="noopener">cndjs</a>，这个网站提供了各种库文件的cdn地址。</p>
+<h2 id="使用angularjs"><a href="#使用angularjs" class="headerlink" title="使用angularjs"></a>使用angularjs</h2><p>要使用angularjs只需引入其js文件即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后在html标签出加入<code>ng-app</code>，ng-app指令标记了AngularJS脚本的作用域，提醒angular处理整个html.</p>
+<h2 id="数据绑定例子"><a href="#数据绑定例子" class="headerlink" title="数据绑定例子"></a>数据绑定例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html ng-app&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">  	&lt;script src=&quot;http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.min.js&quot;&gt;&lt;/script&gt; </span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body &gt;</span><br><span class="line">	&lt;div &gt; </span><br><span class="line">	&lt;input type=&quot;number&quot; min=0 ng-model=&quot;price&quot; ng-init=&quot;price=4&quot;&gt;</span><br><span class="line">	&lt;input type=&quot;number&quot; min=0 ng-model=&quot;num&quot; ng-init=&quot;num=4&quot;&gt;</span><br><span class="line">	&#123;&#123; price*num&#125;&#125;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，程序对input和input进行实时监控，一旦他们的数据有变动，就计算新的结果。其中input1的结果被<code>ng-model</code>绑定到变量<code>price</code>,input2的结果被<code>ng-model</code>绑定到变量<code>num</code>，结果在通过<code>\{\{\}\}</code>符号来显示其乘积。<br>看看效果图<br><img src="/pic/angular/1.gif" alt="Alt text" title="Optional title"></p>
+<h2 id="地址级联"><a href="#地址级联" class="headerlink" title="地址级联"></a>地址级联</h2><p>地址级联实现的是一个常见的填写地址的功能，首先选择省直辖市级别，再显示当前省级别下的地级市，依次类推。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html ng-app&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">  	&lt;script src=&quot;http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.min.js&quot;&gt;&lt;/script&gt; </span><br><span class="line">	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">.selectsty&#123;</span><br><span class="line">	width:150px </span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;  </span><br><span class="line">var listMem =function($scope,$q,$http)&#123; </span><br><span class="line">	$scope.mems = &quot;&quot;</span><br><span class="line">	$scope.submems = &quot;&quot;; </span><br><span class="line">	$scope.subsubmems = &quot;&quot;; </span><br><span class="line">	$scope.totaladd = &quot;&quot;;</span><br><span class="line">	$scope.param = &quot;&quot;;</span><br><span class="line">	$scope.param2 = &quot;&quot;;</span><br><span class="line">	$scope.param3 = &quot;&quot;;</span><br><span class="line">	$http.get(&apos;./city.min.json&apos;).success(function(data)&#123;</span><br><span class="line">			$scope.mems = data;</span><br><span class="line">		&#125;</span><br><span class="line">	);</span><br><span class="line">	$scope.selChange = function(param)&#123;</span><br><span class="line">		for(i=0;i&lt;$scope.mems.length;i++)&#123;</span><br><span class="line">			if($scope.mems[i].p==param)</span><br><span class="line">				$scope.submems = $scope.mems[i].c;</span><br><span class="line">				$scope.subsubmems = &quot;&quot;;  </span><br><span class="line">		&#125; </span><br><span class="line">			$scope.param = param;</span><br><span class="line">			$scope.param2 = &quot;&quot;; </span><br><span class="line">			$scope.param3 = &quot;&quot;; </span><br><span class="line">	 		$scope.totaladd = $scope.param +&quot; &quot;+ $scope.param2 +&quot; &quot;+$scope.param3 +&quot; &quot;;  </span><br><span class="line">	&#125;</span><br><span class="line">	$scope.selChange2 = function(param)&#123;</span><br><span class="line">		for(i=0;i&lt;$scope.submems.length;i++)&#123;</span><br><span class="line">			if($scope.submems[i].n==param)</span><br><span class="line">				$scope.subsubmems = $scope.submems[i].a;			</span><br><span class="line">		&#125;  </span><br><span class="line">			$scope.param2 = param; </span><br><span class="line">			$scope.param3 = &quot;&quot;; </span><br><span class="line">			$scope.totaladd = $scope.param +&quot; &quot;+ $scope.param2 +&quot; &quot;+$scope.param3 +&quot; &quot;;  </span><br><span class="line">	&#125;</span><br><span class="line">	$scope.selChange3 = function(param)&#123; </span><br><span class="line">			$scope.param3 = param;	</span><br><span class="line">			$scope.totaladd = $scope.param +&quot; &quot;+ $scope.param2 +&quot; &quot;+$scope.param3 +&quot; &quot;;  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt; </span><br><span class="line"></span><br><span class="line"> &lt;/head&gt;</span><br><span class="line">  &lt;body &gt;</span><br><span class="line">	&lt;div ng-controller=&quot;listMem&quot;&gt; </span><br><span class="line">		&lt;select ng-model=&quot;param&quot; ng-change=&quot;selChange(param)&quot;  class=&quot;form-control selectsty&quot;&gt;</span><br><span class="line">		&lt;option value=&quot;&quot;&gt;-- 请选择 --&lt;/option&gt; </span><br><span class="line">		&lt;option ng-repeat=&quot;mem in mems&quot; value=&quot;&#123;&#123;mem.p&#125;&#125;&quot;&gt;</span><br><span class="line">		&#123;&#123;mem.p&#125;&#125;</span><br><span class="line">		&lt;/option&gt;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">	&lt;select ng-model=&quot;param2&quot; ng-change=&quot;selChange2(param2)&quot; class=&quot;form-control selectsty&quot;&gt;</span><br><span class="line">		&lt;option value=&quot;&quot;&gt;-- 请选择 --&lt;/option&gt; </span><br><span class="line">		&lt;option ng-repeat=&quot;submem in submems&quot; value=&quot;&#123;&#123;submem.n&#125;&#125;&quot;&gt;</span><br><span class="line">		&#123;&#123;submem.n&#125;&#125;</span><br><span class="line">		&lt;/option&gt;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">	&lt;select ng-model=&quot;param3&quot; ng-change=&quot;selChange3(param3)&quot; class=&quot;form-control selectsty&quot;&gt;</span><br><span class="line">		&lt;option value=&quot;&quot;&gt;-- 请选择 --&lt;/option&gt; </span><br><span class="line">		&lt;option ng-repeat=&quot;subsubmem in subsubmems&quot; value=&quot;&#123;&#123;subsubmem.s&#125;&#125;&quot;&gt;</span><br><span class="line">		&#123;&#123;subsubmem.s&#125;&#125;</span><br><span class="line">		&lt;/option&gt;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">	&lt;input id=&quot;address&quot; type=&quot;text&quot; value=&quot;&#123;&#123;totaladd&#125;&#125;&quot;&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>看看效果图,界面略简陋<br><img src="/pic/angular/2.gif" alt="Alt text" title="Optional title"></p>
+<p>这个例子当时出了一个找了很久才找到的错误，就是静态网页无法读取本地，无奈之下只能又将它放到tomcat目录运行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$http.get(&apos;./city.min.json&apos;).success(function(data)&#123;</span><br><span class="line">            $scope.mems = data;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2014/07/11/angular学习-地址级联/" data-id="cjbc9suxh000iyoqb9dr6v6dc" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/07/23/一个自己用nodejs独立开发的小作品/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    一个自己用nodejs独立开发的小作品
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/06/29/nodejs学习笔记(4) - redis使用/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">nodejs学习笔记(4) - redis使用</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>用FusionCharts代替JFreeChart画图表 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="近来用olap做联机分析处理。当我从网上下载下来一个工程的时候发现这个工程原本用的制图工具jpivot制出来的图比较糙，不够清晰。竟发现jpivot底层用的是jfreechart,当时跟一网友聊天，他向我推荐FusionCharts,说这个比较好，于是就来了解下。 FusionCharts是一个跨浏览器和跨平台的flash和javascript图表组件，能够被 ASP.NET, ASP, PHP,">
+<meta name="keywords" content="FusionCharts,JFreeChart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用FusionCharts代替JFreeChart画图表">
+<meta property="og:url" content="http://38sr.com/2014/06/06/用FusionCharts代替JFreeChart画图表/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="近来用olap做联机分析处理。当我从网上下载下来一个工程的时候发现这个工程原本用的制图工具jpivot制出来的图比较糙，不够清晰。竟发现jpivot底层用的是jfreechart,当时跟一网友聊天，他向我推荐FusionCharts,说这个比较好，于是就来了解下。 FusionCharts是一个跨浏览器和跨平台的flash和javascript图表组件，能够被 ASP.NET, ASP, PHP,">
+<meta property="og:image" content="http://38sr.com/pic/jfreechart.png">
+<meta property="og:image" content="http://38sr.com/pic/fusionchart.jpg">
+<meta property="og:updated_time" content="2015-09-22T12:32:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用FusionCharts代替JFreeChart画图表">
+<meta name="twitter:description" content="近来用olap做联机分析处理。当我从网上下载下来一个工程的时候发现这个工程原本用的制图工具jpivot制出来的图比较糙，不够清晰。竟发现jpivot底层用的是jfreechart,当时跟一网友聊天，他向我推荐FusionCharts,说这个比较好，于是就来了解下。 FusionCharts是一个跨浏览器和跨平台的flash和javascript图表组件，能够被 ASP.NET, ASP, PHP,">
+<meta name="twitter:image" content="http://38sr.com/pic/jfreechart.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-用FusionCharts代替JFreeChart画图表" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            用FusionCharts代替JFreeChart画图表
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/06/06/用FusionCharts代替JFreeChart画图表/">
+            <time datetime="2014-06-06T01:48:19.000Z" itemprop="datePublished">2014-06-06</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/畅游互联网/">畅游互联网</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/FusionCharts/">FusionCharts</a>, <a class="tag-link" href="/tags/JFreeChart/">JFreeChart</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>近来用<code>olap</code>做联机分析处理。当我从网上下载下来一个工程的时候发现这个工程原本用的制图工具jpivot制出来的图比较糙，不够清晰。竟发现<code>jpivot</code>底层用的是<code>jfreechart</code>,当时跟一网友聊天，他向我推荐FusionCharts,说这个比较好，于是就来了解下。</p>
+<h2 id="FusionCharts"><a href="#FusionCharts" class="headerlink" title="FusionCharts"></a>FusionCharts</h2><p>是一个跨浏览器和跨平台的flash和javascript图表组件，能够被 ASP.NET, ASP, PHP, JSP, ColdFusion, Ruby on Rails, 简单 HTML 页面 甚至PPT调用. 几乎所有你知道的语言它都支持。</p>
+<h2 id="JFreeChart"><a href="#JFreeChart" class="headerlink" title="JFreeChart"></a>JFreeChart</h2><p>是一个开源java图表库，让开发者能够很容易在程序里面显示高质量的图表。 JFreeChart 项目从7年前便开始了，起始于 2000 年1月, 已经有四五万开发者已经使用了JFreeChart。JFreeChart 支持很多种图形文件格式： JPEG, GIF, PDF, EPS and SVG. 这对于java开发者是一个很好的资源。</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>他们的区别在于jFreeChart是直接生成一张非矢量图，而FusionCharts用标签或者视频代替生成一张图片，这样子的话，当页面放大时，图还是很清楚。当然jFreeChart上手快，方便方面也是其优点。jFreeChart是完全开源的，这点很赞。FusionCharts提供一个无限期的试用版本，很好很强大。</p>
+<h2 id="FusionCharts用法"><a href="#FusionCharts用法" class="headerlink" title="FusionCharts用法"></a>FusionCharts用法</h2><ol>
+<li>首先到官网把FusionCharts         XTVersion:3.3.1<a href="http://www.fusioncharts.com/downloads/Evals/FusionCharts_XT_Evaluation.zip" target="_blank" rel="noopener">下载</a>，下来先，他还提供了FusionWidgets XT，PowerCharts XT，FusionMaps XT集中不同的产品，我暂时还没用到。</li>
+<li>新建一个LearningFusionCharts的文件夹，然后在其目录下再新建一个MyFirstChart的文件夹。在MyFirstChart下新建一个存放各种js，和swf的文件夹FusionCharts</li>
+<li>将 Column3D.swf 从 Charts目录下copy到 FusionCharts  ，然后将FusionCharts.js, FusionCharts.HC.js, FusionCharts.HC.Charts.js 和 jquery.min.js也copy到FusionCharts下面去</li>
+<li><p>在MyFirestChart下新建index.html并输入如下内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;        </span><br><span class="line">&lt;title&gt;My First chart using FusionCharts XT - JSON data URL&lt;/title&gt;         </span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;FusionCharts/FusionCharts.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;   </span><br><span class="line">&lt;body&gt;     </span><br><span class="line">&lt;div id=&quot;chartContainer&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;          </span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;&lt;!--         </span><br><span class="line">var myChart = new FusionCharts( &quot;FusionCharts/Column3D.swf&quot;,&quot;myChartId&quot;, &quot;400&quot;, &quot;300&quot;, &quot;0&quot; );</span><br><span class="line">myChart.setXMLUrl(&quot;Data.xml&quot;);</span><br><span class="line">myChart.render(&quot;chartContainer&quot;);          </span><br><span class="line">// --&gt;     </span><br><span class="line">&lt;/script&gt;      </span><br><span class="line">&lt;/body&gt; </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>这段代码会图表会以flash的形式呈现，如果你的浏览器不支持flash才会进行javascript渲染，如果你想以纯javascript渲染的图，应该将上面的代码替换为下面这段代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    &lt;html&gt;</span><br><span class="line">  &lt;head&gt;        </span><br><span class="line">    &lt;title&gt;My First chart using FusionCharts XT&lt;/title&gt;         </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;FusionCharts/FusionCharts.js&quot;&gt;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">  &lt;/head&gt;   </span><br><span class="line">  &lt;body&gt;     </span><br><span class="line">    &lt;div id=&quot;chartContainer&quot;&gt;FusionCharts XT will load here!&lt;/div&gt;          </span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;&lt;!--         </span><br><span class="line">  FusionCharts.setCurrentRenderer(&apos;javascript&apos;);</span><br><span class="line">      var myChart = new FusionCharts( &quot;Column3D&quot;, </span><br><span class="line">      &quot;myChartId&quot;, &quot;400&quot;, &quot;300&quot;, &quot;0&quot; );</span><br><span class="line">      myChart.setXMLUrl(&quot;Data.xml&quot;);</span><br><span class="line">      myChart.render(&quot;chartContainer&quot;);</span><br><span class="line">      </span><br><span class="line">    // --&gt;     </span><br><span class="line">    &lt;/script&gt;      </span><br><span class="line">  &lt;/body&gt; </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>页面准备好了，接下来准备数据，FusionCharts支持json和xml两种不同格式的数据。在MyFirestChart新建Data.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;chart caption=&apos;Weekly Sales Summary&apos;</span><br><span class="line">xAxisName=&apos;Week&apos; yAxisName=&apos;Amount&apos; numberPrefix=&apos;$&apos;&gt;</span><br><span class="line">  &lt;set label=&apos;Week 1&apos; value=&apos;14400&apos; /&gt;</span><br><span class="line">  &lt;set label=&apos;Week 2&apos; value=&apos;19600&apos; /&gt;</span><br><span class="line">  &lt;set label=&apos;Week 3&apos; value=&apos;24000&apos; /&gt;</span><br><span class="line">  &lt;set label=&apos;Week 4&apos; value=&apos;15700&apos; /&gt;</span><br><span class="line">&lt;/chart&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当我再常识用json代替xml时发现<code>error in loading data</code>。</p>
+<p>发现官网提供的资料有关于这一问题的说明：</p>
+<ol>
+<li>Many Web servers like IIS6, does not supply .json (no wildcard MIME type) files by default. You will need to setup your Web server to supply json files. In IIS6, you can do this using these steps: Open the properties for the server in IIS Manager and click MIME Types Click “New”. Enter “JSON” for the extension and “application/json” for the MIME type</li>
+<li>Many browsers restrict JavaScript from accessing local file system owing to security reasons. The JavaScript charts, when running locally, will not be able to access data provided as a URL. If you run the files from a server, it will run absolutely fine, though. When running locally, however, if you provide the data as string (using the Data String method), it works fine.  Click here to see the code using the Data String method »</li>
+</ol>
+<p>大致就是说很多iis6服务器不支持，很多浏览器由于安全原因不支持javascript读取本地的文件系统，于是把这个网页部署到j2ee工程即可看到效果。<br>用jfreechart生成的图片<br><img src="/pic/jfreechart.png" alt="jfreechart"><br>用fusionchart生成的图，虽然不是一样的数据，但感觉还是明显的不一样<br><img src="/pic/fusionchart.jpg" alt="fusionchart"><br>你可以在原页面尝试看到效果后滚动鼠标放大页面看看，图表的棱角都很清晰</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2014/06/06/用FusionCharts代替JFreeChart画图表/" data-id="cjbc9sv2m004oyoqbq5vsrek0" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/06/13/mondrian+jpivot工程中修改底层的图片渲染工具/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    mondrian+jpivot工程中修改底层的图片渲染工具
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/06/04/hexo主题支持编辑数学公式/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">hexo博客支持编辑数学公式</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

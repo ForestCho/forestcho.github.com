@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>关于android开发环境的创建  | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="最近想扩展下自己的知识，想想java android方面的应该比c、C++要好点，然后就想重操旧业学习android 大三的时候我学过一个学期的android知识。当时创建开发环境我很快就弄好了，但是环境创建险些让我崩溃。 环境搭建包括四步： 1、JDK安装 有过java开发经验的都安装过，主要就是环境的配置，path，classpath配置好后可以通过在命令窗口输入java -version 来">
+<meta name="keywords" content="java,android,eclipse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于android开发环境的创建 ">
+<meta property="og:url" content="http://38sr.com/2013/08/21/关于android开发环境的创建/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近想扩展下自己的知识，想想java android方面的应该比c、C++要好点，然后就想重操旧业学习android 大三的时候我学过一个学期的android知识。当时创建开发环境我很快就弄好了，但是环境创建险些让我崩溃。 环境搭建包括四步： 1、JDK安装 有过java开发经验的都安装过，主要就是环境的配置，path，classpath配置好后可以通过在命令窗口输入java -version 来">
+<meta property="og:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled-300x86.png">
+<meta property="og:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled-300x73.jpg">
+<meta property="og:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled1-300x105.jpg">
+<meta property="og:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled2-300x126.jpg">
+<meta property="og:updated_time" content="2016-02-21T12:39:54.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于android开发环境的创建 ">
+<meta name="twitter:description" content="最近想扩展下自己的知识，想想java android方面的应该比c、C++要好点，然后就想重操旧业学习android 大三的时候我学过一个学期的android知识。当时创建开发环境我很快就弄好了，但是环境创建险些让我崩溃。 环境搭建包括四步： 1、JDK安装 有过java开发经验的都安装过，主要就是环境的配置，path，classpath配置好后可以通过在命令窗口输入java -version 来">
+<meta name="twitter:image" content="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled-300x86.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ForestCho</h2>
+            <h3 id="title"></h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ForestCho/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                128
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ForestCho/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-关于android开发环境的创建" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            关于android开发环境的创建 
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2013/08/21/关于android开发环境的创建/">
+            <time datetime="2013-08-20T16:09:43.000Z" itemprop="datePublished">2013-08-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/畅游互联网/">畅游互联网</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/android/">android</a>, <a class="tag-link" href="/tags/eclipse/">eclipse</a>, <a class="tag-link" href="/tags/java/">java</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>最近想扩展下自己的知识，想想java android方面的应该比c、C++要好点，然后就想重操旧业学习android</p>
+<p>大三的时候我学过一个学期的android知识。当时创建开发环境我很快就弄好了，但是环境创建险些让我崩溃。</p>
+<p>环境搭建包括四步：</p>
+<p><strong>1、JDK安装</strong></p>
+<p>有过java开发经验的都安装过，主要就是环境的配置，path，classpath配置好后可以通过在命令窗口输入java -version 来判断是否装好</p>
+<p>[caption id=”attachment_192” align=”aligncenter” width=”300”]<a href="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled.png" target="_blank" rel="noopener"><img src="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled-300x86.png" alt="输入java -version"></a> 输入java -version[/caption]</p>
+<p><strong>2、Eclipse 安装</strong></p>
+<p>直接去官网<a href="http://www.eclipse.org/downloads/" target="_blank" rel="noopener">官网下载</a> ，Eclipse IDE for Java Developers看下你机子是32好事64位的。</p>
+<p><strong>3、androidSDK（software development kit)安装</strong></p>
+<p>这是最麻烦的一步了，</p>
+<p>从Android Developers下载android-sdk_r05-windows.zip，。</p>
+<p>然后点击SDK Setup.exe，点击Available Packages。如果没有出现可安装的包，请点击Settings，选中Misc中的”Force <a href="https://...&quot;这项，再点击Available" target="_blank" rel="noopener">https://...&quot;这项，再点击Available</a> Packages 。</p>
+<p>选择希望安装的SDK及其文档或者其它包，点击Installation Selected、Accept All、Install Accepted，开始下载安装所选包</p>
+<p>最后配置下SDK tools的绝对路径，在环境变量的变量名为path下面添加tools的地址一般为D:\AndroidDevelop\android-sdk-windows\tools</p>
+<p><strong>4、android ADT（Android Development Tools）的安装</strong></p>
+<p>这一步建议用比较新的eclipse，我之前用的版本较旧，所以并没有找到install software项</p>
+<p>A、首先打开eclipse，help-&gt;install new software</p>
+<p>B、点击Add，这时会弹出一个对话框，Name任意输入，Location：<a href="http://dl-ssl.google.com/android/eclipse" title="http://dl-ssl.google.com/android/eclipse" target="_blank" rel="noopener">http://dl-ssl.google.com/android/eclipse</a>，然后点击ok</p>
+<p>C、这是我们点击下拉框就会出现我们刚才输入的名字和网址，</p>
+<p>[caption id=”attachment_193” align=”aligncenter” width=”300”]<a href="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled.jpg" target="_blank" rel="noopener"><img src="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled-300x73.jpg" alt="输入的名字和网址"></a> 输入的名字和网址[/caption]</p>
+<p>选中下面两项，然后一步一步往下面点</p>
+<p>[caption id=”attachment_194” align=”aligncenter” width=”300”]<a href="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled1.jpg" target="_blank" rel="noopener"><img src="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled1-300x105.jpg" alt="选中两项"></a> 选中两项[/caption]</p>
+<p><strong>5、AVD的创建</strong></p>
+<p>为了使android应用程序在模拟器中运行，就得创建AVD</p>
+<p>A、打开eclipse windows-&gt;android virtual Device Manager</p>
+<p>B、点击new 出现一个create new virtual device 的弹出框，</p>
+<ul>
+<li>输入你想要的AVD Name,</li>
+<li>Device中选中模拟器所模拟的手机型号？，</li>
+<li>target选择已安装的androidSDK，</li>
+<li>CPU选择ARM<br>点击ok即可</li>
+</ul>
+<p>==============================</p>
+<p>在安装中也遇到很多问题，例如SDK更新时出现 warning:a folder failed to be moved.</p>
+<p>[caption id=”attachment_195” align=”aligncenter” width=”300”]<a href="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled2.jpg" target="_blank" rel="noopener"><img src="http://www.yidongzhifu.net/wp-content/uploads/2013/08/untitled2-300x126.jpg" alt="出现错误咯"></a> 出现错误咯[/caption]</p>
+<p>这个问题网上有两种方法解决，</p>
+<p><strong>第一种方法(貌似是从国外的网站上找来)：</strong></p>
+<p>1、复制 tools目录 为一个新的目录 tools-copy ,此时在android-sdk-windows 目录下有两个目录 tools 和 tools-copy</p>
+<p>2、在tools-copy目录运行 android.bat ，这样就可以正常 update all 了</p>
+<p>3、之后，关闭 sdk,</p>
+<p>4、在 android-sdk-windows 目录运行 SDK Setup.exe</p>
+<p><strong>第二种方法：</strong></p>
+<p>1、进入sdk的temp文件夹，下载好后会有一个tools_r10-windows.zip(版本号可能会不一样，如r09)</p>
+<p>2、 解压此文件，如解压到tools_r10-windows目录</p>
+<p>3、 进入tools_r10-windows文件夹，将tools_r1006-windows里的文件复制</p>
+<p>4、 覆盖掉sdk根目录的tools文件夹中的文件</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://38sr.com/2013/08/21/关于android开发环境的创建/" data-id="cjbc9sv0j0030yoqbmxuhf4ch" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2013/08/21/statement和preparedstatement学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    Statement和PreparedStatement学习笔记
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2013/08/18/新浪开发者与微信相结合的成果/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">新浪开发者与微信相结合的成果</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/05/19/小记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/05/19/小记/" class="title">小记</a></p>
+                            <p class="item-date"><time datetime="2016-05-19T11:22:32.000Z" itemprop="datePublished">2016-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/25/用nodejs模拟v2ex登录并获取福利/" class="title">用nodejs模拟v2ex登录并获取福利</a></p>
+                            <p class="item-date"><time datetime="2016-02-25T12:02:32.000Z" itemprop="datePublished">2016-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/21/nodejs学习笔记(5) - nodejs模拟登录和发帖/" class="title">nodejs学习笔记(5) - nodejs模拟登录和发帖</a></p>
+                            <p class="item-date"><time datetime="2016-02-21T03:29:32.000Z" itemprop="datePublished">2016-02-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/02/18/background-attachment是个什么东东？/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/02/18/background-attachment是个什么东东？/" class="title">background-attachment是个什么东东？</a></p>
+                            <p class="item-date"><time datetime="2016-02-18T13:49:32.000Z" itemprop="datePublished">2016-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/01/23/6个让内容垂直居中的方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/代码/">代码</a></p>
+                            <p class="item-title"><a href="/2016/01/23/6个让内容垂直居中的方法/" class="title">6个让内容垂直居中的方法</a></p>
+                            <p class="item-date"><time datetime="2016-01-23T11:15:32.000Z" itemprop="datePublished">2016-01-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活小记/">生活小记</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/畅游互联网/">畅游互联网</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Forest Cho<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
